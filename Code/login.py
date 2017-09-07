@@ -59,23 +59,13 @@ class Login(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             nickname = user.nickname()
-	    logout_url = users.create_logout_url('/')
+	    logout_url = users.create_logout_url('www/dashboard.html')
 	    greeting = 'Welcome, {}! (<a href = "{}">Sign Out</a>)'.format(nickname, logout_url)
         else:
             login_url = users.create_login_url('/')
 	    greeting = '<a href = "{}">Sign In</a>'.format(login_url)
 
 	self.response.write('<html><h1 style="text-align:center">ToLoP - Toyr "R" Us Loss Prevention</h1><body>{}</body></html>'.format(greeting))
-#        template_values = {	
-#            'user': user,
-#            'greetings': greetings,
-#            'guestbook_name': urllib.quote_plus(guestbook_name),
-#            'url': url,
-#            'url_linktext': url_linktext,
-#        }
-
-#        template = JINJA_ENVIRONMENT.get_template('index.html')
-#        self.response.write(template.render(template_values))
 # [END Login]
 
 

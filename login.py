@@ -1,4 +1,3 @@
-
 # [START imports]
 import os
 import urllib

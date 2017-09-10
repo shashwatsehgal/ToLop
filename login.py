@@ -42,7 +42,7 @@ class Project(ndb.Model):
     author = ndb.StructuredProperty(Author)
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
-# [END greeting]
+# [END Project]
 
 
 # [START LoginPage]

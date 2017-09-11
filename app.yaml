@@ -18,6 +18,9 @@ handlers:
 # login: required
 # [END handlers]
 
+- url: /create
+  script: login.app
+
 # [START libraries]
 libraries:
 - name: webapp2

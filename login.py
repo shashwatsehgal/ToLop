@@ -1,6 +1,7 @@
 # [START imports]
 import os
 import urllib
+import datetime
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -24,24 +25,38 @@ DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
 def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     """Constructs a Datastore key for a Guestbook entity.
-
     We use guestbook_name as the key.
     """
     return ndb.Key('Guestbook', guestbook_name)
 
+# [START SearchPlatform]
+class SearchPlatform(ndb.Model):
+    name = ndb.StringProperty()
+    url = ndb.StringProperty()
+    search = ndb.BooleanProperty()
+# [END SearchPlatform]
 
-# [START greeting]
-class Author(ndb.Model):
-    """Sub model for representing an author."""
-    identity = ndb.StringProperty(indexed=False)
-    email = ndb.StringProperty(indexed=False)
-
-
+# [START Project]
 class Project(ndb.Model):
     """A main model for representing an individual Project entry."""
-    author = ndb.StructuredProperty(Author)
-    content = ndb.StringProperty(indexed=False)
+    name = ndb.StringProperty(indexed=False)
+    author = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
+
+    sku = ndb.IntegerProperty()
+    dateOfTheft = ndb.DateTimeProperty(auto_now_add=True)
+    listPrice = ndb.IntegerProperty()
+    zipCode = ndb.IntegerProperty()
+    website = ndb.StringProperty()
+
+    platforms = [
+    	SearchPlatform(
+	    name = 'eBay',
+	    search = False),
+	SearchPlatform(
+	    name = 'Craigslist',
+	    search = False)
+	]
 # [END Project]
 
 
@@ -56,15 +71,13 @@ class LoginPage(webapp2.RequestHandler):
 	    greeting = 'Welcome, {}'.format(nickname)
 	    button1 = 'Dashboard'
 	    button2 = 'Log Out'
-#	    self.response.write("<html><a href = {}>Dashboard </a></html>".format(next_url1))
-#	    self.response.write("<html><a href = {}>Sign Out </a></html>".format(next_url2))
         else:
             next_url1 = users.create_login_url('/dashboard')
 	    next_url2 = None
 	    greeting = 'You are logged out. Please sign in to proceed'
 	    button1 = 'Log in'
 	    button2 = None
-#	    self.response.write("<html><a href = {}>Sign in </a></html>".format(next_url1))
+	
 	template_values = {
 	    'greeting': greeting,
 	    'url1': next_url1,
@@ -72,7 +85,7 @@ class LoginPage(webapp2.RequestHandler):
 	    'button1': button1,
 	    'button2': button2
 	}
-	print(template_values)
+	
 	template = JINJA_ENVIRONMENT.get_template('www/index.html')
 	self.response.write(template.render(template_values))
 
@@ -82,6 +95,28 @@ class LoginPage(webapp2.RequestHandler):
 
 # [START CreateProject]
 class CreateProject(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            nickname = user.nickname()
+	    greeting = 'Create New Project'
+	    button1 = 'Dashboard'
+	    button2 = 'Log Out'
+        else:
+            next_url1 = users.create_login_url('/dashboard')
+	    next_url2 = None
+	    greeting = 'You are logged out. Please sign in to proceed'
+	    button1 = 'Log in'
+	    button2 = None
+	template_values = {
+	    'greeting': greeting,
+	    'author': nickname,
+	    'date': datetime.datetime.today().strftime('%m-%d-%Y')
+	}
+	print(template_values)
+	template = JINJA_ENVIRONMENT.get_template('www/create.html')
+	self.response.write(template.render(template_values))
+    
     def post(self):
         guestbook_name = self.request.get('guestbook_name',
                                           DEFAULT_GUESTBOOK_NAME)
@@ -103,7 +138,7 @@ class Dashboard(webapp2.RequestHandler):
     def get(self):
 	user = users.get_current_user()
 	if user:
-	    self.response.write('<html>This is a dashboard</html>')
+	    self.response.write('<html>This is a dashboard. <a href = "/create"> Create project</a></html>')
 	else:
 	    self.response.write('<html>Invalid Login - pls relogin</html>')
 # [End Dashboard]

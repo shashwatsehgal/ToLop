@@ -15,7 +15,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 # [END imports]
 
-DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
+DEFAULT_PROJECT_NAME = 'default_project'
 
 
 # We set a parent key on the 'Greetings' to ensure that they are all
@@ -23,11 +23,11 @@ DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 # will be consistent. However, the write rate should be limited to
 # ~1/second.
 
-def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
-    """Constructs a Datastore key for a Guestbook entity.
-    We use guestbook_name as the key.
+def project_key(project_name=DEFAULT_PROJECT_NAME):
+    """Constructs a Datastore key for a Project entity.
+    We use project_name as the key.
     """
-    return ndb.Key('Guestbook', guestbook_name)
+    return ndb.Key('Project', project_name)
 
 # [START SearchPlatform]
 class SearchPlatform(ndb.Model):
@@ -39,7 +39,7 @@ class SearchPlatform(ndb.Model):
 # [START Project]
 class Project(ndb.Model):
     """A main model for representing an individual Project entry."""
-    name = ndb.StringProperty(indexed=False)
+    projectName = ndb.StringProperty(indexed=False)
     author = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
@@ -100,36 +100,39 @@ class CreateProject(webapp2.RequestHandler):
         if user:
             nickname = user.nickname()
 	    greeting = 'Create New Project'
-	    button1 = 'Dashboard'
-	    button2 = 'Log Out'
+	    template_values = {
+	    	'greeting': greeting,
+	    	'author': nickname,
+	    	'date': datetime.datetime.today().strftime('%m/%d/%Y')
+	    }
+	    print(template_values)
+	    template = JINJA_ENVIRONMENT.get_template('www/create.html')
+	    self.response.write(template.render(template_values))
         else:
-            next_url1 = users.create_login_url('/dashboard')
-	    next_url2 = None
-	    greeting = 'You are logged out. Please sign in to proceed'
-	    button1 = 'Log in'
-	    button2 = None
-	template_values = {
-	    'greeting': greeting,
-	    'author': nickname,
-	    'date': datetime.datetime.today().strftime('%m-%d-%Y')
-	}
-	print(template_values)
-	template = JINJA_ENVIRONMENT.get_template('www/create.html')
-	self.response.write(template.render(template_values))
+	    template_values = {
+	    	'greeting': 'You are logged out. Please sign in to proceed',
+	    	'url1': users.create_login_url('/dashboard'),
+	    	'button1': 'Login',
+	    	'button2': None,
+		}
+	    template = JINJA_ENVIRONMENT.get_template('www/index.html')
+	    self.response.write(template.render(template_values))
+
     
     def post(self):
-        guestbook_name = self.request.get('guestbook_name',
-                                          DEFAULT_GUESTBOOK_NAME)
-        greeting = Greeting(parent=guestbook_key(guestbook_name))
-        if users.get_current_user():
-            greeting.author = Author(
-                    identity=users.get_current_user().user_id(),
-                    email=users.get_current_user().email())
-
-        greeting.content = self.request.get('content')
-        greeting.put()
-        query_params = {'guestbook_name': guestbook_name}
-        self.redirect('/?' + urllib.urlencode(query_params))
+            newProject = Project()
+#        if request.POST.get('save', None):
+	    newProject.projectName = self.request.get('projectName')
+	    newProject.author = self.request.get('author')
+            #newProject.date = self.request.get('date')
+            newProject.sku = int(self.request.get('sku'))
+            #newProject.dateOfTheft = self.request.get('dateOfTheft')
+            newProject.listPrice = int(self.request.get('listPrice'))
+            newProject.zipCode = int(self.request.get('zipCode'))
+            newProject.website = self.request.get('webSite')
+            newProject.platforms = self.request.get('platform', allow_multiple=True)
+            newProject.put()
+	    self.redirect('/dashboard')
 # [END CreateProject]
 
 
@@ -138,9 +141,28 @@ class Dashboard(webapp2.RequestHandler):
     def get(self):
 	user = users.get_current_user()
 	if user:
-	    self.response.write('<html>This is a dashboard. <a href = "/create"> Create project</a></html>')
+	    project_query = Project.query()
+	    projects = project_query.fetch(10)
+	    template_values = {
+	    	'greeting': 'Dashboard',
+	    	'url1': ('/create'),
+	    	'url2': users.create_logout_url('/'),
+	    	'button1': 'New Project',
+	    	'button2': 'Logout',
+		'projects': projects
+		}
+	    template = JINJA_ENVIRONMENT.get_template('www/dashboard.html')
+	    self.response.write(template.render(template_values))
+	    	
 	else:
-	    self.response.write('<html>Invalid Login - pls relogin</html>')
+	    template_values = {
+	    	'greeting': 'You are logged out. Please sign in to proceed',
+	    	'url1': users.create_login_url('/dashboard'),
+	    	'button1': 'Login',
+	    	'button2': None
+		}
+	    template = JINJA_ENVIRONMENT.get_template('www/index.html')
+	    self.response.write(template.render(template_values))
 # [End Dashboard]
 
 # [START app]

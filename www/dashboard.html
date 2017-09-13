@@ -40,13 +40,29 @@
     <hr>
     <div class="container">
       <!-- [START projects] -->
-      {% for project in projects %}
-      <div class="row">
-        <blockquote>{{ project.projectName }}</blockquote>
-      </div>
-      {% endfor %}
+      <table style = "width:90%">
+          <tr>
+	      <th> Project Name </th>
+	      <th> Created By </th>
+	      <th> Created On </th>
+	      <th> Status </th>
+	      <th> Actions </th>
+	  </tr>
+	  {% for project in projects %}
+	  <tr>
+	      <th> {{project.projectName}} </th>
+	      <th> {{project.author}} </th>
+	      <th> {{project.date}} </th>
+	      <th> {{project.status}} </th>
+	      <th> <input name="edit" value="Edit" type="submit"/>
+	      <input name="delete" value="Delete" type="submit"/>
+	      <input name="run" value="Run" type="submit"/> </th>
+	  </tr>
+      	  {% endfor %}
+      </table> 
+	
       <!-- [END projects] -->
-
+    <hr>
     <form> 
       <input type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
       {% if button2 != None %}

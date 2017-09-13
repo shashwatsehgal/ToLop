@@ -1,8 +1,8 @@
 # [START imports]
 import os
 import urllib
-import datetime
 
+from datetime import datetime
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -48,6 +48,7 @@ class Project(ndb.Model):
     listPrice = ndb.IntegerProperty()
     zipCode = ndb.IntegerProperty()
     website = ndb.StringProperty()
+    status = ndb.StringProperty()
 
     platforms = [
     	SearchPlatform(
@@ -103,7 +104,7 @@ class CreateProject(webapp2.RequestHandler):
 	    template_values = {
 	    	'greeting': greeting,
 	    	'author': nickname,
-	    	'date': datetime.datetime.today().strftime('%m/%d/%Y')
+	    	'date': datetime.today().strftime('%m/%d/%Y')
 	    }
 	    print(template_values)
 	    template = JINJA_ENVIRONMENT.get_template('www/create.html')
@@ -124,14 +125,24 @@ class CreateProject(webapp2.RequestHandler):
 #        if request.POST.get('save', None):
 	    newProject.projectName = self.request.get('projectName')
 	    newProject.author = self.request.get('author')
-            #newProject.date = self.request.get('date')
-            newProject.sku = int(self.request.get('sku'))
-            #newProject.dateOfTheft = self.request.get('dateOfTheft')
-            newProject.listPrice = int(self.request.get('listPrice'))
-            newProject.zipCode = int(self.request.get('zipCode'))
+            newProject.date = datetime.strptime(self.request.get('date'),"%m/%d/%Y")
+            if self.request.get('sku')=="":
+		newProject.sku = 0
+	    else:
+		newProject.sku = int(self.request.get('sku'))
+            newProject.dateOfTheft = datetime.strptime(self.request.get('dateOfTheft'),"%Y-%m-%d")
+            if self.request.get('listPrice')=="":
+		newProject.listPrice = 0
+	    else:
+		newProject.listPrice = int(self.request.get('listPrice'))
+            if self.request.get('zipCode')=="":
+		newProject.zipCode = 0
+	    else:
+		newProject.zipCode = int(self.request.get('zipCode'))
             newProject.website = self.request.get('webSite')
             newProject.platforms = self.request.get('platform', allow_multiple=True)
-            newProject.put()
+            newProject.status = "In Progress"
+	    newProject.put()
 	    self.redirect('/dashboard')
 # [END CreateProject]
 

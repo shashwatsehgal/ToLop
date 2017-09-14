@@ -50,13 +50,15 @@
 	  </tr>
 	  {% for project in projects %}
 	  <tr>
-	      <th> {{project.projectName}} </th>
-	      <th> {{project.author}} </th>
-	      <th> {{project.date}} </th>
-	      <th> {{project.status}} </th>
-	      <th> <input name="edit" value="Edit" type="submit"/>
-	      <input name="delete" value="Delete" type="submit"/>
-	      <input name="run" value="Run" type="submit"/> </th>
+	      <td align="center"> {{project.projectName}} </td>
+	      <td align="center"> {{project.author}} </td>
+	      <td align="center"> {{project.date}} </td>
+	      <td align="center"> {{project.status}} </td>
+	      <td align="center"> 
+			<input name="edit" value="Edit" type="submit"/>
+	      		<input name="delete" value="Delete" type="submit"/>
+	      		<input name="run" value="Run" type="submit"/> 
+	      </td>
 	  </tr>
       	  {% endfor %}
       </table> 

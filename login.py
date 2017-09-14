@@ -121,8 +121,8 @@ class CreateProject(webapp2.RequestHandler):
 
     
     def post(self):
-            newProject = Project()
-#        if request.POST.get('save', None):
+  	newProject = Project()
+        if self.request.POST.get('save', None):
 	    newProject.projectName = self.request.get('projectName')
 	    newProject.author = self.request.get('author')
             newProject.date = datetime.strptime(self.request.get('date'),"%m/%d/%Y")
@@ -144,7 +144,10 @@ class CreateProject(webapp2.RequestHandler):
             newProject.status = "In Progress"
 	    newProject.put()
 	    self.redirect('/dashboard')
+	elif self.request.POST.get('delete',None):
+	    print("Deleting!!")	
 # [END CreateProject]
+
 
 
 # [START Dashboard]
@@ -174,6 +177,9 @@ class Dashboard(webapp2.RequestHandler):
 		}
 	    template = JINJA_ENVIRONMENT.get_template('www/index.html')
 	    self.response.write(template.render(template_values))
+
+#    def post(self):
+		
 # [End Dashboard]
 
 # [START app]

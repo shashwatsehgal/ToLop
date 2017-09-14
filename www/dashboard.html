@@ -15,7 +15,7 @@
         border-left-color: #bbb;
       }
       form {
-        margin-top: 10px;
+        margin-top: 	0px;
       }
       .form-signin input[type="text"] {
         font-size: 16px;
@@ -54,10 +54,12 @@
 	      <td align="center"> {{project.author}} </td>
 	      <td align="center"> {{project.date}} </td>
 	      <td align="center"> {{project.status}} </td>
-	      <td align="center"> 
+	      <td align="center">
+	      	    <form action="/dashboard" method="post">
 			<input name="edit" value="Edit" type="submit"/>
 	      		<input name="delete" value="Delete" type="submit"/>
-	      		<input name="run" value="Run" type="submit"/> 
+	      		<input name="run" value="Run" type="submit"/>
+		    </form>
 	      </td>
 	  </tr>
       	  {% endfor %}

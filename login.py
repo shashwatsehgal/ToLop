@@ -178,8 +178,9 @@ class Dashboard(webapp2.RequestHandler):
 	    template = JINJA_ENVIRONMENT.get_template('www/index.html')
 	    self.response.write(template.render(template_values))
 
-#    def post(self):
-		
+    def post(self):
+        if self.request.POST.get('delete', None):
+		print("DELETING!!!")
 # [End Dashboard]
 
 # [START app]

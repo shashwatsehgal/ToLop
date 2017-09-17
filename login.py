@@ -9,6 +9,7 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
+
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -145,43 +146,46 @@ class CreateProject(webapp2.RequestHandler):
 	    newProject.put()
 	    self.redirect('/dashboard')
 	elif self.request.POST.get('delete',None):
-	    print("Deleting!!")	
+	    key = self.request.get('projectKey')
+	    print(key)
 # [END CreateProject]
-
 
 
 # [START Dashboard]
 class Dashboard(webapp2.RequestHandler):
     def get(self):
-	user = users.get_current_user()
-	if user:
-	    project_query = Project.query()
-	    projects = project_query.fetch(10)
-	    template_values = {
-	    	'greeting': 'Dashboard',
-	    	'url1': ('/create'),
-	    	'url2': users.create_logout_url('/'),
-	    	'button1': 'New Project',
-	    	'button2': 'Logout',
-		'projects': projects
-		}
-	    template = JINJA_ENVIRONMENT.get_template('www/dashboard.html')
-	    self.response.write(template.render(template_values))
-	    	
-	else:
-	    template_values = {
-	    	'greeting': 'You are logged out. Please sign in to proceed',
-	    	'url1': users.create_login_url('/dashboard'),
-	    	'button1': 'Login',
-	    	'button2': None
-		}
-	    template = JINJA_ENVIRONMENT.get_template('www/index.html')
-	    self.response.write(template.render(template_values))
+        user = users.get_current_user()
+        if user:
+            project_query = Project.query()
+            projects = project_query.fetch(10)
+            template_values = {
+                'greeting': 'Dashboard',
+                'url1': ('/create'),
+                'url2': users.create_logout_url('/'),
+                'button1': 'New Project',
+                'button2': 'Logout',
+                'projects': projects
+                }
+            template = JINJA_ENVIRONMENT.get_template('www/dashboard.html')
+            self.response.write(template.render(template_values))
+
+        else:
+            template_values = {
+                'greeting': 'You are logged out. Please sign in to proceed',
+                'url1': users.create_login_url('/dashboard'),
+                'button1': 'Login',
+                'button2': None
+                }
+            template = JINJA_ENVIRONMENT.get_template('www/index.html')
+            self.response.write(template.render(template_values))
 
     def post(self):
         if self.request.POST.get('delete', None):
-		print("DELETING!!!")
+            print("DELETING!!!")
+	    key = self.request.get('project.key')
+	    print(key)
 # [End Dashboard]
+
 
 # [START app]
 app = webapp2.WSGIApplication([

@@ -40,7 +40,7 @@
     <hr>
     <form method="post" action="/create">
       <br/>
-      Project Name <input type="text" name="projectName"/>
+      Project Name <input type="text" name="projectName" value="{{projectName}}"/>
       <br/>
       <br/>
       Author <input type="text" name="author" value="{{author}}"/>
@@ -56,7 +56,7 @@
       SKU # <input type="text" name="sku" value="{{sku}}"/>
       <br/>
       <br/>
-      Date of Theft <input type="date" name="dateOfTheft" value="{{dateOfTheft}}"/>
+      Date of Theft <input type="text" name="dateOfTheft" value="{{dateOfTheft}}"/>
       <br/>
       <br/>
       List Price <input type="text" name="listPrice" value="{{listPrice}}"/>
@@ -65,7 +65,7 @@
       ZIP Code <input type="text" name="zipCode" value="{{zipCode}}"/>
       <br/>
       <br/>
-      Website <input type="text" name="webSite" value="{{webSite}}"/>
+      Website <input type="text" name="website" value="{{website}}"/>
       <br/>
       <br/>
     <hr>
@@ -80,9 +80,7 @@
       <input type="checkbox" name="platform6" value="Facebook"> Facebook MarketPlace <br/>
     <hr>
       <input name="save" value="Save" type="submit"/>
-      <input name"run" value="Run" type="submit"/>
-      <input name="delete" value="Delete" type="submit"/>
-      <input type="button" name="return" value="Return to Dashboard" onclick="window.location.href='/dashboard'"/>
+      <input name="return" value="Return to Dashboard" type="submit"/>
     </form>
   </body>
 </html>

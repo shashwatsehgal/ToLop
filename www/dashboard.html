@@ -56,7 +56,7 @@
 	      <td align="center"> {{project.status}} </td>
 	      <td align="center">
 	      	    <form action="/dashboard" method="post">
-		    	<input name="key" tye='Text' hidden> {{project.key}}/i>
+		    	<input name="key" type="text" value="{{project.key}}" hidden/>
 			<input name="edit" value="Edit" type="submit"/>
 	      		<input name="delete" value="Delete" type="submit"/>
 	      		<input name="run" value="Run" type="submit"/>

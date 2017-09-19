@@ -52,7 +52,7 @@
 	  <tr>
 	      <td align="center"> {{project.projectName}} </td>
 	      <td align="center"> {{project.author}} </td>
-	      <td align="center"> {{project.date}} </td>
+	      <td align="center"> {{project.date.strftime("%m/%d/%Y")}} </td>
 	      <td align="center"> {{project.status}} </td>
 	      <td align="center">
 	      	    <form action="/dashboard" method="post">

@@ -94,18 +94,18 @@ class CreateProject(webapp2.RequestHandler):
         			strKey = self.request.get('id')
 				newKey = stringToKey(strKey)
 			 	existingProject = newKey.get()
-				print("Getting project"+existingProject.projectName)
 				template_values = {
 					'greeting': 'Edit Project',
 					'projectName': existingProject.projectName,
 					'author': existingProject.author,
-					'date': existingProject.date,
+					'date': existingProject.date.strftime("%m/%d/%Y"),
 					'sku': existingProject.sku,
-					'dateOfTheft': existingProject.dateOfTheft,
+					'dateOfTheft': existingProject.dateOfTheft.strftime("%m/%d/%Y"),
 					'listPrice': existingProject.listPrice,
 					'zipCode': existingProject.zipCode,
 					'website': existingProject.website,
-					'status': existingProject.status
+					'status': existingProject.status,
+					'strKey': strKey
 				}
 			else:	
 				nickname = user.nickname()
@@ -129,12 +129,13 @@ class CreateProject(webapp2.RequestHandler):
 
 
     	def post(self):
-  		newProject = Project()
         	if self.request.POST.get('save', None):
-	    		if self.request.get('id', None):
-        			strKey = self.request.get('id')
+			if self.request.POST.get('key'):
+				strKey = self.request.POST.get('key')
 				newKey = stringToKey(strKey)
-			 	newProject = newKey.get()
+				newProject = newKey.get()
+			else:
+				newProject = Project()
 			newProject.projectName = self.request.get('projectName')
 	    		newProject.author = self.request.get('author')
             		newProject.date = datetime.strptime(self.request.get('date'),"%m/%d/%Y")

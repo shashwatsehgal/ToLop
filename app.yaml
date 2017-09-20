@@ -12,7 +12,7 @@ handlers:
   script: login.app
 
 - url: /assets
-  static_dir: /www/assets
+  static_dir: www/assets
 
 - url: /dashboard
   script: login.app 

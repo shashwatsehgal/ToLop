@@ -30,10 +30,10 @@
         Tip 3: you can change the color of the sidebar with data-background-color="white | black"
     -->
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                <a href="/dashboard" class="simple-text logo-mini">
                     
                 </a>
-                <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                <a href="/dashboard" class="simple-text logo-normal">
                     TOYS "R" US
                 </a>
             </div>
@@ -152,46 +152,117 @@
                                 <div class="card-content">
                                     <h3 class="card-title">Create a new project</h4>
                                     <div class="table-responsive">
-                                        <form method="post" action="/create">
-                                              <br/>
-                                              Project Name <input type="text" name="projectName" value="{{projectName}}"/>
-                                              <br/>
-                                              <br/>
-                                              Author <input type="text" name="author" value="{{author}}"/>
-                                              <br/>
-                                              <br/>
-                                              Date Created:  <input type="text" name="date" value="{{date}}"/>
-                                              <br/>
-                                              <br/>
-                                            <hr>
-                                              <b> Item Details: </b>
-                                              <br/>
-                                              <br/>
-                                              SKU # <input type="text" name="sku" value="{{sku}}"/>
-                                              <br/>
-                                              <br/>
-                                              Date of Theft <input type="text" name="dateOfTheft" value="{{dateOfTheft}}"/>
-                                              <br/>
-                                              <br/>
-                                              List Price <input type="text" name="listPrice" value="{{listPrice}}"/>
-                                              <br/>
-                                              <br/>
-                                              ZIP Code <input type="text" name="zipCode" value="{{zipCode}}"/>
-                                              <br/>
-                                              <br/>
-                                              Website <input type="text" name="website" value="{{website}}"/>
-                                              <br/>
-                                              <br/>
-                                            <hr>
-                                              <b> Which platform(s) do you want to search? </b>
-                                              <br/>
-                                              <br/>
-                                              <input type="checkbox" name="platform1" value="Craigslist"> Craigslist <br/>
-                                              <input type="checkbox" name="platform2" value="eBay"> eBay <br/>
-                                              <input type="checkbox" name="platform3" value="Amazon"> Amazon <br/>
-                                              <input type="checkbox" name="platform4" value="OfferUp"> OfferUp <br/>
-                                              <input type="checkbox" name="platform5" value="LetGo"> LetGo <br/>
-                                              <input type="checkbox" name="platform6" value="Facebook"> Facebook MarketPlace <br/>
+                                        <form class="form-horizontal" method="post" action="/create">
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">Project name</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"></label>
+                                                        <input type="text" class="form-control" name="projectName" value="{{projectName}}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">Author</label>
+                                                <div class="col-md-10">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"></label>
+                                                        <input type="email" class="form-control" name="author" value="{{author}}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">Date created</label>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <label class="label-control"></label>
+                                                        <input type="text" class="form-control datetimepicker" name="date" value="{{date}}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <b> Item Details: </b>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">SKU</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"></label>
+                                                        <input type="text" class="form-control" name="sku" value="{{sku}}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">Date of Theft</label>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <label class="label-control"></label>
+                                                        <input type="text" class="form-control datetimepicker" name="dateOfTheft" value="{{dateOfTheft}}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">List price</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"></label>
+                                                        <input type="text" class="form-control" name="listPrice" value="{{listPrice}}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">Zip code</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"></label>
+                                                        <input type="text" class="form-control" name="zipCode" value="{{zipCode}}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">Website</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"></label>
+                                                        <input type="text" class="form-control" name="website" value="{{website}}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <hr>
+                                            <b> Which platform(s) do you want to search? </b> -->
+                                            <div class="row">
+                                            <label class="col-sm-2 label-on-left">Which platform(s) do you want to search? </label>
+                                            <div class="col-sm-10 checkbox-radios">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="platform1" value="Craigslist"> Craigslist
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="platform2" value="eBay"> eBay
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="platform3" value="Amazon"> Amazon
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="platform4" value="OfferUp"> OfferUp
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="platform5" value="LetGo"> LetGo
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="platform6" value="Facebook"> Facebook MarketPlace
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                             <hr>
                                               <input name="key" value="{{strKey}}" type="text" hidden/>
                                               <input name="save" value="Save" type="submit"/>

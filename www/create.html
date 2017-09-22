@@ -150,48 +150,53 @@
                                     <i class="material-icons">assignment</i>
                                 </div>
                                 <div class="card-content">
-                                    <h3 class="card-title">Active Projects</h4>
+                                    <h3 class="card-title">Create a new project</h4>
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Type</th>
-                                                    <th>Created by</th>
-                                                    <th>Created on</th>
-                                                    <th>Status</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for project in projects %}
-                                                    <tr>
-                                                        <td> {{project.projectName}} </td>
-                                                        <td> Type place holder </td>
-                                                        <td> {{project.author}} </td>
-                                                        <td> {{project.date}} </td>
-                                                        <td> {{project.status}} </td>
-                                                        <td align="center">
-                                                            <form action="/dashboard" method="post">
-                                                                <input name="key" type="text" value="{{project.key}}" hidden/>
-                                                                <input name="edit" value="Edit" type="submit"/>
-                                                                <input name="delete" value="Delete" type="submit"/>
-                                                                <input name="run" value="Run" type="submit"/>
-                                                            </form>
-                                                      </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                        <button class="btn btn-success" onclick="window.location.href='{{url1}}'">
-                                            <span class="btn-label">
-                                                <i class="material-icons">check</i>
-                                            </span>
-                                            New Project
-                                        </button>
-                                        <button class="btn btn-danger" onclick="window.location.href='{{url2}}'">
-                                            <i class="material-icons">close</i> Logout
-                                        </button>
+                                        <form method="post" action="/create">
+                                              <br/>
+                                              Project Name <input type="text" name="projectName" value="{{projectName}}"/>
+                                              <br/>
+                                              <br/>
+                                              Author <input type="text" name="author" value="{{author}}"/>
+                                              <br/>
+                                              <br/>
+                                              Date Created:  <input type="text" name="date" value="{{date}}"/>
+                                              <br/>
+                                              <br/>
+                                            <hr>
+                                              <b> Item Details: </b>
+                                              <br/>
+                                              <br/>
+                                              SKU # <input type="text" name="sku" value="{{sku}}"/>
+                                              <br/>
+                                              <br/>
+                                              Date of Theft <input type="text" name="dateOfTheft" value="{{dateOfTheft}}"/>
+                                              <br/>
+                                              <br/>
+                                              List Price <input type="text" name="listPrice" value="{{listPrice}}"/>
+                                              <br/>
+                                              <br/>
+                                              ZIP Code <input type="text" name="zipCode" value="{{zipCode}}"/>
+                                              <br/>
+                                              <br/>
+                                              Website <input type="text" name="website" value="{{website}}"/>
+                                              <br/>
+                                              <br/>
+                                            <hr>
+                                              <b> Which platform(s) do you want to search? </b>
+                                              <br/>
+                                              <br/>
+                                              <input type="checkbox" name="platform1" value="Craigslist"> Craigslist <br/>
+                                              <input type="checkbox" name="platform2" value="eBay"> eBay <br/>
+                                              <input type="checkbox" name="platform3" value="Amazon"> Amazon <br/>
+                                              <input type="checkbox" name="platform4" value="OfferUp"> OfferUp <br/>
+                                              <input type="checkbox" name="platform5" value="LetGo"> LetGo <br/>
+                                              <input type="checkbox" name="platform6" value="Facebook"> Facebook MarketPlace <br/>
+                                            <hr>
+                                              <input name="key" value="{{strKey}}" type="text" hidden/>
+                                              <input name="save" value="Save" type="submit"/>
+                                              <input name="return" value="Return to Dashboard" type="submit"/>
+                                            </form>
                                     </div>
                                 </div>
                             </div>

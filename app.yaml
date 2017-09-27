@@ -9,20 +9,23 @@ handlers:
   upload: favicon\.ico
 
 - url: /
-  script: login.app
+  script: main.app
 
 - url: /assets
   static_dir: www/assets
 
 - url: /dashboard
-  script: login.app 
+  script: main.app 
 #  static_files: www/dashboard.html
 #  upload: www/dashboard.html
 # login: required
 # [END handlers]
 
 - url: /create
-  script: login.app
+  script: main.app
+
+- url: /run
+  script: main.app
 
 # [START libraries]
 libraries:

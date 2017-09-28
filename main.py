@@ -9,11 +9,10 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
-from baseClasses import *
-from createProject import *
-from runProject import *
-from dashboard import *
-from login import *
+from login import LoginPage
+from dashboard import Dashboard
+from createProject import CreateProject
+from runProject import RunProject
 
 # [START app]
 app = webapp2.WSGIApplication([
@@ -23,5 +22,3 @@ app = webapp2.WSGIApplication([
     ('/run', RunProject),
 ], debug=True)
 # [END app]
-
-

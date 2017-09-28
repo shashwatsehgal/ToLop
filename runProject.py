@@ -1,9 +1,9 @@
 # [START imports]
-import ebaysdk
-from ebaysdk import finding
-from ebaysdk.finding import Connection as finding
 import os
 import urllib
+
+import ebaysdk
+from ebaysdk.finding import Connection as finding
 
 from datetime import datetime
 from google.appengine.api import users
@@ -27,7 +27,7 @@ class RunProject(webapp2.RequestHandler):
 		strKey = self.request.get('id')
 		newKey = stringToKey(strKey)
 		existingProject = newKey.get()
-
+		print "\nProject Name %s \n"%existingProject.projectName
 		api = finding(appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
 		api.execute('findItemsAdvanced', {
 			'keywords': ['toys r us','exclusive',existingProject.projectName],
@@ -42,7 +42,6 @@ class RunProject(webapp2.RequestHandler):
 			},
     			'sortOrder': 'CurrentPriceHighest'
 		})
-		
 		dictstr = api.response.reply.searchResult
  		
 		template_values = {
@@ -50,7 +49,7 @@ class RunProject(webapp2.RequestHandler):
                         'url2': ('/dashboard'),
                         'button1': 'Save Results',
                         'button2': 'Return to Dashboard',
-                        'searchResults': dictstr 
+                     	'searchResults': dictstr 
                         }
                 template = JINJA_ENVIRONMENT.get_template('www/results.html')
                 self.response.write(template.render(template_values))		
@@ -68,5 +67,5 @@ class RunProject(webapp2.RequestHandler):
     				print "Shipping Cost: $%s" % i.shippingInfo.shippingServiceCost.value 
     			else: 
     				print "Shipping Cost: $0"
-    				print "\n"
+	print "\n"
 

@@ -43,7 +43,6 @@
       <table style = "width:90%">
           <tr>
 	      <th> Item </th>
-	      <th> URL</th>
 	      <th> Location </th>
 	      <th> ZipCode </th>
 	      <th> Price </th>
@@ -55,17 +54,16 @@
 	  </tr>
 	  {% for item in searchResults %}
 	  <tr>
-	      <td align="center"> {{item.title}} </td>
-	      <td align="center"> {{item.viewItemURL}} </td>
+	      <td> <a href="{{item.viewItemURL}}"> {{item.title[0:50]}}... </a> </td>
 	      <td align="center"> {{item.location}} </td>
 	      <td align="center"> {{item.postalCode}} </td>
-	      <td align="center"> {{item.sellingStatus.currentPrice.value}} </td>
+	      <td align="center"> ${{item.sellingStatus.currentPrice.value}} </td>
 	      <td align="center"> {{item.condition.conditionDisplayName}} </td>
-	      <td align="center"> {{item.shippingInfo.shippingServiceCost.value}} </td>
-	      <td align="center"> {{item.listingInfo.startTime}} </td>
+	      <td align="center"> {{'$%s' %item.shippingInfo.shippingServiceCost.value if item.shippingInfo.shippingServiceCost}} </td>
+	      <td align="center"> {{item.listingInfo.startTime.strftime("%b %d, %Y")}} </td>
+	      <td> </td>
 	      <td align="center">
 	      	    <form action="/dashboard" method="post">
-		    	<input name="key" type="text" value="{{project.key}}" hidden/>
 			<input name="edit" value="Mark as Safe" type="submit"/>
 	      		<input name="delete" value="Suspicious" type="submit"/>
 	      		<input name="run" value="Details" type="submit"/>

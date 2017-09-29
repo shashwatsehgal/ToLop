@@ -27,11 +27,11 @@ class RunProject(webapp2.RequestHandler):
 		strKey = self.request.get('id')
 		newKey = stringToKey(strKey)
 		existingProject = newKey.get()
-		print "\nProject Name %s \n"%existingProject.projectName
 		api = finding(appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
 		api.execute('findItemsAdvanced', {
-			'keywords': ['toys r us','exclusive',existingProject.projectName],
+			'keywords': ['toys r us'],
 			'itemFilter': [
+        			{'name': 'globalId', 'value': 'EBAY-US'},
         			{'name': 'Condition', 'value': 'New'},
         			{'name': 'MinPrice', 'value': '1', 'paramName': 'Currency', 'paramValue': 'USD'},
         			{'name': 'MaxPrice', 'value': '10000', 'paramName': 'Currency', 'paramValue': 'USD'}
@@ -53,7 +53,6 @@ class RunProject(webapp2.RequestHandler):
                 }
                 template = JINJA_ENVIRONMENT.get_template('www/results.html')
                 self.response.write(template.render(template_values))		
-	
 	
 #		for i in dictstr.item:
 #    			print "Title: %s" % i.title

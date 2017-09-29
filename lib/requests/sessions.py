@@ -653,8 +653,8 @@ class Session(SessionRedirectMixin):
                 r._next = next(self.resolve_redirects(r, request, yield_requests=True, **kwargs))
             except StopIteration:
                 pass
-
-        if not stream:
+        
+	if not stream:
             r.content
 
         return r

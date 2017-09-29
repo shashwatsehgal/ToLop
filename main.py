@@ -9,6 +9,9 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
+import requests_toolbelt.adapters.appengine
+requests_toolbelt.adapters.appengine.monkeypatch()
+
 from login import LoginPage
 from dashboard import Dashboard
 from createProject import CreateProject

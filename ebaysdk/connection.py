@@ -111,7 +111,7 @@ class BaseConnection(object):
         "Executes the HTTP request."
         log.debug('execute: verb=%s data=%s' % (verb, data))
 
-        self._reset()
+	self._reset()
 
         self._list_nodes += list_nodes
         self._add_prefix(self._list_nodes, verb)

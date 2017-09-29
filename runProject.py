@@ -49,23 +49,23 @@ class RunProject(webapp2.RequestHandler):
                         'url2': ('/dashboard'),
                         'button1': 'Save Results',
                         'button2': 'Return to Dashboard',
-                     	'searchResults': dictstr 
-                        }
+                     	'searchResults': dictstr.item 
+                }
                 template = JINJA_ENVIRONMENT.get_template('www/results.html')
                 self.response.write(template.render(template_values))		
 	
 	
-		for i in dictstr.item:
-    			print "Title: %s" % i.title
-    			print "URL: %s" % i.viewItemURL
-    			print "ZIP Code: %s" % i.postalCode
-    			print "Location: %s" % i.location
-    			print "Price: $%s" % i.sellingStatus.currentPrice.value
-    			print "Condition: %s" % i.condition.conditionDisplayName
-    			print "Post Time: %s" % i.listingInfo.startTime
-    			if hasattr(i.shippingInfo, 'shippingServiceCost'): 
-    				print "Shipping Cost: $%s" % i.shippingInfo.shippingServiceCost.value 
-    			else: 
-    				print "Shipping Cost: $0"
-	print "\n"
+#		for i in dictstr.item:
+#    			print "Title: %s" % i.title
+#    			print "URL: %s" % i.viewItemURL
+#    			print "ZIP Code: %s" % i.postalCode
+#    			print "Location: %s" % i.location
+#    			print "Price: $%s" % i.sellingStatus.currentPrice.value
+#    			print "Condition: %s" % i.condition.conditionDisplayName
+#    			print "Post Time: %s" % i.listingInfo.startTime
+#    			if hasattr(i.shippingInfo, 'shippingServiceCost'): 
+#    				print "Shipping Cost: $%s" % i.shippingInfo.shippingServiceCost.value 
+#    			else: 
+#    				print "Shipping Cost: $0"
+#	print "\n"
 

@@ -18,7 +18,7 @@ handlers:
   script: main.app 
 #  static_files: www/dashboard.html
 #  upload: www/dashboard.html
-# login: required
+#  login: required
 # [END handlers]
 
 - url: /create

@@ -27,17 +27,18 @@ class RunProject(webapp2.RequestHandler):
 		strKey = self.request.get('id')
 		newKey = stringToKey(strKey)
 		existingProject = newKey.get()
-		api = finding(appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
+		api = finding(siteid ='EBAY-US', appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
 		api.execute('findItemsAdvanced', {
-			'keywords': ['toys r us'],
+			'keywords': ['toys r us exclusive '+'star wars'],
 			'itemFilter': [
         			{'name': 'globalId', 'value': 'EBAY-US'},
         			{'name': 'Condition', 'value': 'New'},
         			{'name': 'MinPrice', 'value': '1', 'paramName': 'Currency', 'paramValue': 'USD'},
-        			{'name': 'MaxPrice', 'value': '10000', 'paramName': 'Currency', 'paramValue': 'USD'}
+        			{'name': 'MaxPrice', 'value': '10000', 'paramName': 'Currency', 'paramValue': 'USD'},
+				{'name': 'LocatedIn', 'value': 'US'}
     			],
     			'paginationInput': {
-        			'entriesPerPage': '25',
+        			'entriesPerPage': '100',
 			        'pageNumber': '1' 	 
 			},
     			'sortOrder': 'CurrentPriceHighest'

@@ -155,25 +155,26 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Type</th>
+                                                    <th>Item Name</th>
+                                                    <th>SKU</th>
                                                     <th>Created by</th>
                                                     <th>Created on</th>
                                                     <th>Status</th>
-                                                    <th>Actions</th>
+                                                    <th align="center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {% for project in projects %}
                                                     <tr>
                                                         <td> {{project.projectName}} </td>
-                                                        <td> Type place holder </td>
+                                                        <td> {{project.sku}} </td>
                                                         <td> {{project.author}} </td>
-                                                        <td> {{project.date}} </td>
+                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
                                                         <td> {{project.status}} </td>
-                                                        <td align="center">
+                                                        <td align="left">
                                                             <form action="/dashboard" method="post">
                                                                 <input name="key" type="text" value="{{project.key}}" hidden/>
+                                                                <input name="page" type="text" value="1" hidden/>
                                                                 <input name="edit" value="Edit" type="submit"/>
                                                                 <input name="delete" value="Delete" type="submit"/>
                                                                 <input name="run" value="Run" type="submit"/>

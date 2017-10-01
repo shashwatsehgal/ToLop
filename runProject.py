@@ -29,29 +29,43 @@ class RunProject(webapp2.RequestHandler):
 		existingProject = newKey.get()
 		api = finding(siteid ='EBAY-US', appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
 		api.execute('findItemsAdvanced', {
-			'keywords': ['toys r us exclusive '+'star wars'],
+			'keywords': ['toys r us exclusive '+existingProject.projectName],
+			'buyerPostalCode': existingProject.zipCode,
 			'itemFilter': [
-        			{'name': 'globalId', 'value': 'EBAY-US'},
+        			{'name': 'ListedIn', 'value': 'EBAY-US'},
+        			{'name': 'LocatedIn', 'value': 'US'},
         			{'name': 'Condition', 'value': 'New'},
-        			{'name': 'MinPrice', 'value': '1', 'paramName': 'Currency', 'paramValue': 'USD'},
+        			{'name': 'MinPrice', 'value': '100', 'paramName': 'Currency', 'paramValue': 'USD'},
         			{'name': 'MaxPrice', 'value': '10000', 'paramName': 'Currency', 'paramValue': 'USD'},
-				{'name': 'LocatedIn', 'value': 'US'}
+				{'name': 'MaxDistance', 'value': '100'}
     			],
-    			'paginationInput': {
-        			'entriesPerPage': '100',
-			        'pageNumber': '1' 	 
-			},
-    			'sortOrder': 'CurrentPriceHighest'
+    			'sortOrder': 'DistanceNearest'
 		})
-		dictstr = api.response.reply.searchResult
- 		
-		template_values = {
-			'greeting': 'Results',
-                        'url2': ('/dashboard'),
-                        'button1': 'Save Results',
-                        'button2': 'Return to Dashboard',
-                     	'searchResults': dictstr.item 
-                }
+ 	
+		if hasattr(api.response.reply, 'paginationOutput'):
+			numResults = api.response.reply.paginationOutput.totalEntries
+			numPages = (int(numResults) - int(numResults) % 50)//50 + 1 
+			dictstr = api.response.reply.searchResult
+			template_values = {
+				'numResults': numResults,
+				'numPages': numPages,
+				'projectID': strKey,
+				'greeting': 'Results: '+numResults+' posts found on eBay',
+                       		'url2': ('/dashboard'),
+       	        	        'button1': 'Save Results',
+        	                'button2': 'Return to Dashboard',
+                  		'searchResults': dictstr.item
+                	}
+		else:
+			template_values = {
+				'numResults': 0,
+				'numPages': 0,
+				'projectID': strKey,
+				'greeting': 'Results: 0 posts found on eBay',
+                        	'url2': ('/dashboard'),
+     	        	        'button1': 'Save Results',
+        	                'button2': 'Return to Dashboard'
+			}
                 template = JINJA_ENVIRONMENT.get_template('www/results.html')
                 self.response.write(template.render(template_values))		
 	

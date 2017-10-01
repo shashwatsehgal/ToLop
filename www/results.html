@@ -42,6 +42,7 @@
       <!-- [START projects] -->
       <table style = "width:90%">
           <tr>
+	      <th> </th>
 	      <th> Item </th>
 	      <th> Location </th>
 	      <th> ZipCode </th>
@@ -54,12 +55,13 @@
 	  </tr>
 	  {% for item in searchResults %}
 	  <tr>
-	      <td> <a href="{{item.viewItemURL}}"> {{item.title[0:50]}}... </a> </td>
+	      <td> <img src="{{item.galleryURL}}" style="width:150px;height:100px;" > </td>
+	      <td> <a href="{{item.viewItemURL}}"> {{item.title[0:30]}}... </a> </td>
 	      <td align="center"> {{item.location}} </td>
 	      <td align="center"> {{item.postalCode}} </td>
-	      <td align="center"> ${{item.sellingStatus.currentPrice.value}} </td>
+	      <td align="center"> {{"${:,.2f}".format(item.sellingStatus.currentPrice.value|float)}} </td>
 	      <td align="center"> {{item.condition.conditionDisplayName}} </td>
-	      <td align="center"> {{'$%s' %item.shippingInfo.shippingServiceCost.value if item.shippingInfo.shippingServiceCost}} </td>
+	      <td align="center"> {{"${:,.2f}".format(item.shippingInfo.shippingServiceCost.value|float) if item.shippingInfo.shippingServiceCost}} </td>
 	      <td align="center"> {{item.listingInfo.startTime.strftime("%b %d, %Y")}} </td>
 	      <td> </td>
 	      <td align="center">
@@ -72,16 +74,14 @@
 	  </tr>
       	  {% endfor %}
       </table> 
-	
       <!-- [END projects] -->
     <hr>
-    <form> 
-      <input type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
+    <form>
+    <input type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
       {% if button2 != None %}
       <input type="button" value="{{ button2 }}" onclick="window.location.href='{{url2}}'"/>
       {% endif %}
     </form>
-    
     </div>
   </body>
 </html>

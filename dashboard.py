@@ -47,6 +47,7 @@ class Dashboard(webapp2.RequestHandler):
 
 	def post(self):
         	strKey = self.request.get('key')
+        	page = self.request.get('page')
         	newKey = stringToKey(strKey)
 		if self.request.POST.get('delete', None):
             		newKey.delete()

@@ -38,6 +38,16 @@
         </b> 
     </div>
     <hr>
+    <form action="/run" method="get">
+	{% if currentPage|int > 1%} 
+	    	<input name="page" type="button" value="Previous" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int - 1}}'">
+	{%endif%}
+    	Page {{currentPage}} of {{numPages}}
+	{% if currentPage|int < numPages|int%} 
+		<input name="page" type="button" value="Next" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int + 1}}'">
+	{%endif%}
+    </form>
+    <hr>
     <div class="container">
       <!-- [START projects] -->
       <table style = "width:90%">
@@ -53,10 +63,10 @@
 	      <th> Score </th>
 	      <th> Actions </th>
 	  </tr>
-	  {% for item in searchResults %}
+	  {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
 	  <tr>
 	      <td> <img src="{{item.galleryURL}}" style="width:150px;height:100px;" > </td>
-	      <td> <a href="{{item.viewItemURL}}"> {{item.title[0:30]}}... </a> </td>
+	      <td> <a href="{{item.viewItemURL}}" target="_blank"> {{item.title[0:30]}}... </a> </td>
 	      <td align="center"> {{item.location}} </td>
 	      <td align="center"> {{item.postalCode}} </td>
 	      <td align="center"> {{"${:,.2f}".format(item.sellingStatus.currentPrice.value|float)}} </td>

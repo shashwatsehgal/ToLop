@@ -55,6 +55,6 @@ class Dashboard(webapp2.RequestHandler):
         	elif self.request.POST.get('edit', None):
             		self.redirect('/create?id='+strKey)
 		elif self.request.POST.get('run',None):
-            		self.redirect('/run?id='+strKey)
+            		self.redirect('/run?id='+strKey+'&page=1')
 
 # [End Dashboard]

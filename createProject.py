@@ -25,7 +25,7 @@ class CreateProject(webapp2.RequestHandler):
                 if user:
                         if self.request.get('id', None):
                                 strKey = self.request.get('id')
-                                newKey = stringToKey(strKey)
+                                newKey = stringToKey(strKey, 'Project')
                                 existingProject = newKey.get()
                                 template_values = {
                                         'greeting': 'Edit Project',
@@ -65,10 +65,11 @@ class CreateProject(webapp2.RequestHandler):
                 if self.request.POST.get('save', None):
                         if self.request.POST.get('key'):
                                 strKey = self.request.POST.get('key')
-                                newKey = stringToKey(strKey)
+                                newKey = stringToKey(strKey, 'Project')
                                 newProject = newKey.get()
                         else:
                                 newProject = Project()
+                        	newProject.status = "New"
                         newProject.projectName = self.request.get('projectName')
                         newProject.author = self.request.get('author')
                         newProject.date = datetime.strptime(self.request.get('date'),"%m/%d/%Y")
@@ -80,14 +81,13 @@ class CreateProject(webapp2.RequestHandler):
                         if self.request.get('listPrice')=="":
                                 newProject.listPrice = 0
                         else:
-                                newProject.listPrice = int(self.request.get('listPrice'))
+                                newProject.listPrice = float(self.request.get('listPrice'))
                         if self.request.get('zipCode')=="":
                                 newProject.zipCode = 0
                         else:
                                 newProject.zipCode = int(self.request.get('zipCode'))
                         newProject.website = self.request.get('website')
                         newProject.platforms = self.request.get('platform', allow_multiple=True)
-                        newProject.status = "In Progress"
                         newProject.put()
                         self.redirect('/dashboard')
                 elif self.request.POST.get('return', None):

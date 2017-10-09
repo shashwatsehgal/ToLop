@@ -32,54 +32,151 @@ def urlencode(s):
 
 # [START RunProject]
 class RunProject(webapp2.RequestHandler):
+	# Saves search results in Datastore. Parameters are newKey (key of the project) and searchResults (output for Finding API call 
+	def saveResults(self, newKey, searchResults):
+		for item in searchResults:
+			# Search result is stored as an entity with the project entity as the parent
+			saveResult = SearchResult(parent = newKey)
+			
+			# Building the parameters from the Finding API call output)
+			saveResult.platform = 'eBay'
+			saveResult.website = item.viewItemURL
+			saveResult.location = item.location
+			if hasattr(item, 'postalCode'):
+				saveResult.zipCode = int(item.postalCode)
+				saveResult.distance = float(item.distance.value)
+			else:
+				saveResult.zipCode = 0
+				saveResult.distance = 0
+			saveResult.price = float(item.sellingStatus.currentPrice.value)
+        		if item.shippingInfo.shippingServiceCost == None:
+				saveResult.shippingCost = 0
+        		elif item.shippingInfo.shippingServiceCost == "":
+			        saveResult.shippingCost = 0
+			else:		
+				saveResult.shippingCost = float(item.shippingInfo.shippingServiceCost.value)
+			saveResult.shippingTime = int(item.shippingInfo.handlingTime)
+        		saveResult.condition = item.condition.conditionDisplayName
+        		saveResult.title = item.title
+        		if hasattr(item, 'sellerInfo'):
+				saveResult.seller = item.sellerInfo.sellerUserName
+        			saveResult.sellerRating = item.sellerInfo.sellerFeedbackScore
+			saveResult.postDate = item.listingInfo.startTime
+			
+        		saveResult.comments = 'TO BE FILLED'
+        		#saveResult.image = ndb.BlobProperty()
+        		saveResult.imageLink = item.galleryURL
+			saveResult.searchStatus = "New"
+        		saveResult.searchScore = 1.0
+			
+			# Writing to the Datastore
+			saveResult.put()
+			
 	def get(self):
 		strKey = self.request.get('id')
 		currentPage = self.request.get('page')
-		newKey = stringToKey(strKey)
+		newKey = stringToKey(strKey, 'Project')
 		resultsPerPage = 10
 		existingProject = newKey.get()
-		api = finding(siteid ='EBAY-US', appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
-		api.execute('findItemsAdvanced', {
-			'keywords': ['toys r us '+existingProject.projectName],
-			'buyerPostalCode': existingProject.zipCode,
-			'itemFilter': [
-        			{'name': 'ListedIn', 'value': 'EBAY-US'},
-        			{'name': 'LocatedIn', 'value': 'US'},
-        			{'name': 'Condition', 'value': 'New'},
-				{'name': 'MaxDistance', 'value': '100'}
-    			],
-    			'sortOrder': 'DistanceNearest'
-		})
- 	
-		if hasattr(api.response.reply, 'paginationOutput'):
-			numResults = api.response.reply.paginationOutput.totalEntries
+		
+		# Check if the project has already run once on eBay, if not, then we need to call the Finding API
+		if existingProject.status == "New":
+			api = finding(siteid ='EBAY-US', appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
+			api.execute('findItemsAdvanced', {
+				'keywords': ['toys r us ' + existingProject.projectName],
+				'buyerPostalCode': existingProject.zipCode,
+				'itemFilter': [
+					{'name': 'ListedIn', 'value': 'EBAY-US'},
+					{'name': 'LocatedIn', 'value': 'US'},
+					{'name': 'Condition', 'value': 'New'},
+					{'name': 'MaxDistance', 'value': '100'}
+				],
+				'sortOrder': 'DistanceNearest'
+			})
+			
+			# Check if there is at least 1 result on eBay
+			if hasattr(api.response.reply, 'paginationOutput'):
+				numResults = api.response.reply.paginationOutput.totalEntries
+				numPages = (int(numResults) - int(numResults) % resultsPerPage)//resultsPerPage+ 1 
+				dictstr = api.response.reply.searchResult
+				
+				# Save the results in Datastore
+				self.saveResults(newKey, dictstr.item)
+				
+				# Update the status of the project and write it to the Datastore
+				existingProject.status = "In Progress"
+				existingProject.put()
+
+				# Create the template for the results.html page
+				searchQuery = SearchResult.query(ancestor = newKey).order(SearchResult.distance)
+				searchResults = list(searchQuery.fetch())
+				template_values = {
+					'numResults': numResults,
+					'numPages': numPages,
+					'projectID': strKey,
+					'currentPage': currentPage,
+					'resultsPerPage': resultsPerPage,
+					'greeting': 'Results: '+numResults+' posts found on eBay',
+					'url2': ('/dashboard'),
+					'button1': 'Save Results',
+					'button2': 'Return to Dashboard',
+					'searchResults': searchResults
+				}
+			else:
+				# There are no results on eBay
+				# Create the template for the results.html page
+				template_values = {
+					'numResults': 0,
+					'numPages': 0,
+					'projectID': strKey,
+					'currentPage': currentPage,
+					'resultsPerPage': resultsPerPage,
+					'greeting': 'Results: 0 posts found on eBay',
+					'url2': ('/dashboard'),
+					'button1': 'Save Results',
+					'button2': 'Return to Dashboard'
+				}
+		# Else the project has already been created before; We will simply load the results from Datastore
+		else:
+			searchQuery = SearchResult.query(ancestor = newKey).order(SearchResult.distance)
+			searchResults = list(searchQuery.fetch())
+			numResults = 0
+			for item in searchResults:
+				numResults = numResults + 1
 			numPages = (int(numResults) - int(numResults) % resultsPerPage)//resultsPerPage+ 1 
-			dictstr = api.response.reply.searchResult
 			template_values = {
 				'numResults': numResults,
 				'numPages': numPages,
 				'projectID': strKey,
 				'currentPage': currentPage,
 				'resultsPerPage': resultsPerPage,
-				'greeting': 'Results: '+numResults+' posts found on eBay',
-                       		'url2': ('/dashboard'),
-       	        	        'button1': 'Save Results',
-        	                'button2': 'Return to Dashboard',
-                  		'searchResults': dictstr.item
-                	}
-		else:
-			template_values = {
-				'numResults': 0,
-				'numPages': 0,
-				'projectID': strKey,
-				'currentPage': currentPage,
-				'resultsPerPage': resultsPerPage,
-				'greeting': 'Results: 0 posts found on eBay',
-                        	'url2': ('/dashboard'),
-     	        	        'button1': 'Save Results',
-        	                'button2': 'Return to Dashboard'
+				'greeting': "Results: %d posts found on eBay"%numResults,
+				'url2': ('/dashboard'),
+				'button1': 'Save Results',
+				'button2': 'Return to Dashboard',
+				'searchResults': searchResults
 			}
 
+		# Send the template to the results.html page	
 		JINJA_ENVIRONMENT.filters['urlencode'] = urlencode
                 template = JINJA_ENVIRONMENT.get_template('www/results.html')
-                self.response.write(template.render(template_values))		
+                self.response.write(template.render(template_values))
+
+	def post(self):
+		strKey = self.request.get('projectKey')
+                projectKey = stringToKey(strKey, 'Project')
+                page = self.request.get('page')
+		strItemKey = self.request.get('itemKey')
+		itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
+		if self.request.POST.get('safe', None):
+                        existingItem = itemKey.get()
+			existingItem.searchStatus = "Safe"
+			existingItem.put()
+			self.redirect('/run?id='+strKey+'&page='+page)
+		elif self.request.POST.get('suspicious', None):
+                        existingItem = itemKey.get()
+			existingItem.searchStatus = "Suspicious"
+			existingItem.put()
+			self.redirect('/run?id='+strKey+'&page='+page)
+                elif self.request.POST.get('details', None):
+                        self.redirect('/details?id='+strKey+'&page='+page+'&item='+strItemKey)

@@ -16,6 +16,7 @@ from login import LoginPage
 from dashboard import Dashboard
 from createProject import CreateProject
 from runProject import RunProject
+from resultDetail import ResultDetail
 
 # [START app]
 app = webapp2.WSGIApplication([
@@ -23,6 +24,7 @@ app = webapp2.WSGIApplication([
     ('/dashboard', Dashboard),
     ('/create', CreateProject),
     ('/run', RunProject),
+    ('/details', ResultDetail),
 ], debug=True)
 # [END app]
 

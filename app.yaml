@@ -27,6 +27,9 @@ handlers:
 - url: /run
   script: main.app
 
+- url: /details
+  script: main.app
+
 # [START libraries]
 libraries:
 - name: webapp2

@@ -28,12 +28,15 @@ class LoginPage(webapp2.RequestHandler):
 			greeting = 'Welcome, {}'.format(nickname)
 	    		button1 = 'Dashboard'
 	    		button2 = 'Log Out'
+	    		id1 = 'email'
         	else:
             		next_url1 = users.create_login_url('/dashboard')
 	    		next_url2 = None
 	    		greeting = 'You are logged out. Please sign in to proceed'
 	    		button1 = 'Log in'
 	    		button2 = None
+	    		type1 = None
+	    		id1 = None
 	
 		template_values = {
 			'greeting': greeting,

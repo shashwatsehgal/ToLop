@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-{% autoescape true %}
-
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -27,16 +25,13 @@
 
         </div>
     </nav>
-    <div class="wrapper wrapper-full-page" >
+    <div class="wrapper wrapper-full-page" style="background-color: black">
         <div class="full-page login-page" data-color="blue">
             <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
             <div class="content">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-
-                            {% if button2 != None %}
-
                             <form method="get" action="http://localhost:8080/_ah/login">
                                 <div class="card card-login">
                                     <div class="card-header text-center" data-background-color="black">
@@ -47,12 +42,20 @@
                                             <span class="input-group-addon">
                                                 <i class="material-icons">email</i>
                                             </span>
-                                            <div class="form-group label-floating"> 
-                                                
-                                                <input name = "email" type="email" class="form-control" id="email"/>
-
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Email address</label>
+                                                <input name="email" type="email" class="form-control" id="email">
                                             </div>
                                         </div>
+                                        <!-- <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">lock_outline</i>
+                                            </span>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Password</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                        </div> -->
                                     </div>
                                     <div class="footer text-center">
                                         <button name="action" value="Login" type="submit" id="submit-login" class="btn btn-black btn-simple btn-wd btn-lg">Sign-in</button>
@@ -60,19 +63,6 @@
                                 </div>
                                 <input name="continue" type="hidden" value="http://localhost:8080/dashboard"/>
                             </form>
-
-                            {% else %}
-                            
-                            <form>
-
-                            <button class="btn btn-success" value="{{ button1 }}" onclick="window.location.href='{{url1}}'">
-                            
-                            <button class="btn btn-success" value="{{ button2 }}" onclick="window.location.href='{{url2}}'">                                
-                              
-                            </form>
-
-                            {% endif %}
-
                         </div>
                     </div>
                 </div>
@@ -136,27 +126,55 @@
 </script>
 
 </html>
-{% endautoescape %}
 
+<body class="off-canvas-sidebar">
+    <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+        <div class="container">
 
-<!-- <html>
-  <head>
-  </head>
-  <h1 style="text-align:center"> ToLoP - Toys "R" Us Loss Prevention  </h1>
-  <body>
-    <div class="container">
-        <b> 
-     {{ greeting }}
-        </b> 
+        </div>
+    </nav>
+    <div class="wrapper wrapper-full-page" style="background-color: black">
+        <div class="full-page login-page" data-color="blue">
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+
+                            {% if button2 != None %}
+
+                            <form method="get" action="http://localhost:8080/_ah/login">
+                                <div class="card card-login">
+                                    <div class="card-header text-center" data-background-color="black">
+                                        <h4 class="card-title">Login</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">email</i>
+                                            </span>
+                                            <div class="form-group label-floating"> 
+                                                
+                                                <input name = "{{ id1 }}" type="{{ id1 }}" class="form-control" id="{{ id1 }}"/>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer text-center">
+                                        <button name="action" value="Login" type="submit" id="submit-login" class="btn btn-black btn-simple btn-wd btn-lg">Sign-in</button>
+                                    </div>
+                                </div>
+                                <input name="continue" type="hidden" value="http://localhost:8080/dashboard"/>
+                            </form>
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+            </footer>
+        </div>
     </div>
-      <hr>
-      <form> 
-        <input type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
-        {% if button2 != None %}
-        <input type="button" value="{{ button2 }}" onclick="window.location.href='{{url2}}'"/>
-        {% endif %}
-      </form>
-    
-    </div>
-  </body>
-</html> -->
+</body>

@@ -16,6 +16,28 @@ JINJA_ENVIRONMENT = jinja2.Environment(
         autoescape=True)
 # [END imports]
 
+# [START SearchResult]
+class SearchResult(ndb.Model):
+	platform = ndb.StringProperty()
+	zipCode = ndb.IntegerProperty()
+	distance = ndb.FloatProperty()
+	website = ndb.StringProperty()
+	price = ndb.FloatProperty()
+	shippingCost = ndb.FloatProperty()
+	shippingTime = ndb.IntegerProperty()
+	condition = ndb.StringProperty()
+	title = ndb.StringProperty()
+	seller = ndb.StringProperty()
+	sellerRating = ndb.StringProperty()
+	location = ndb.StringProperty()
+	postDate = ndb.DateProperty()
+	comments = ndb.TextProperty()
+	image = ndb.BlobProperty()
+	imageLink = ndb.StringProperty()	
+	searchStatus = ndb.StringProperty()
+	searchScore = ndb.FloatProperty()
+# [END SearchResult]
+
 
 # [START SearchPlatform]
 class SearchPlatform(ndb.Model):
@@ -33,7 +55,7 @@ class Project(ndb.Model):
 
         sku = ndb.IntegerProperty()
         dateOfTheft = ndb.DateTimeProperty(auto_now_add=True)
-        listPrice = ndb.IntegerProperty()
+        listPrice = ndb.FloatProperty()
         zipCode = ndb.IntegerProperty()
         website = ndb.StringProperty()
         status = ndb.StringProperty()
@@ -48,7 +70,13 @@ class Project(ndb.Model):
         ]
 # [END Project]
 
-def stringToKey(projectKey):
-        className, idparentheses = projectKey.split(", ")
+def stringToKey(Key, entityName):
+        className, idparentheses = Key.split(", ")
         id, parentheses = idparentheses.split(")")
-        return ndb.Key('Project', int(id))
+        return ndb.Key(entityName, int(id))
+
+def stringToKeyWithParent(Key, parentName, entityName):
+        KeyWord, rest = Key.split("'"+parentName+"', ")
+	parentID, entityIDparentheses = rest.split(", '"+entityName+"', ")
+        entityID, parentheses = entityIDparentheses.split(")")
+        return ndb.Key(entityName, int(entityID), parent = ndb.Key(parentName, int(parentID)))

@@ -48,9 +48,13 @@ class Dashboard(webapp2.RequestHandler):
 	def post(self):
         	strKey = self.request.get('key')
         	page = self.request.get('page')
-        	newKey = stringToKey(strKey)
+        	newKey = stringToKey(strKey, 'Project')
 		if self.request.POST.get('delete', None):
-            		newKey.delete()
+            		searchQuery = SearchResult.query(ancestor = newKey)
+			searchResults = list(searchQuery.fetch())
+			for item in searchResults:
+				item.key.delete()
+			newKey.delete()
             		self.redirect('/dashboard')
         	elif self.request.POST.get('edit', None):
             		self.redirect('/create?id='+strKey)

@@ -32,7 +32,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <form method="get" action="http://localhost:8080/_ah/login">
+                            <form method="get" action="/_ah/login">
                                 <div class="card card-login">
                                     <div class="card-header text-center" data-background-color="black">
                                         <h4 class="card-title">Login</h4>
@@ -61,7 +61,7 @@
                                         <button name="action" value="Login" type="submit" id="submit-login" class="btn btn-black btn-simple btn-wd btn-lg">Sign-in</button>
                                     </div>
                                 </div>
-                                <input name="continue" type="hidden" value="http://localhost:8080/dashboard"/>
+                                <input name="continue" type="hidden" value="/dashboard"/>
                             </form>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
 
                             {% if button2 != None %}
 
-                            <form method="get" action="http://localhost:8080/_ah/login">
+                            <form method="get" action="/_ah/login">
                                 <div class="card card-login">
                                     <div class="card-header text-center" data-background-color="black">
                                         <h4 class="card-title">Login</h4>
@@ -164,7 +164,7 @@
                                         <button name="action" value="Login" type="submit" id="submit-login" class="btn btn-black btn-simple btn-wd btn-lg">Sign-in</button>
                                     </div>
                                 </div>
-                                <input name="continue" type="hidden" value="http://localhost:8080/dashboard"/>
+                                <input name="continue" type="hidden" value="/dashboard"/>
                             </form>
 
                             {% endif %}

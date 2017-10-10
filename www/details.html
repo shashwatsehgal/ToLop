@@ -38,7 +38,45 @@
         </b> 
     </div>
       <hr>
-      <form> 
+      <img src = "{{searchItem.imageLink}}" style="width:150px;height:100px;">
+      <br>
+      Platform: {{searchItem.platform}}
+      <br>
+      External Website: <a href = "{{searchItem.website}}">{{searchItem.website[0:30]}}</a>
+      <br>
+      <br>
+      ZipCode: {{searchItem.zipCode}}
+      <br>
+      Distance: {{searchItem.distance}} miles
+      <br>
+      Location: {{searchItem.location}}
+      <br>
+      <br>
+      Price: ${{searchItem.price}}
+      <br>
+      Shipping Cost: ${{searchItem.shippingCost}}
+      <br>
+      Shipping Time: {{searchItem.shippingTime}}
+      <br>
+      Condition: {{searchItem.condition}}
+      <br>
+      <br>
+      Seller: {{searchItem.seller}}
+      <br>
+      Seller Rating: {{searchItem.sellerRating}}
+      <br>
+      Post Date: {{searchItem.postDate}}
+      <br>
+      <br>
+      Comments: {{searchItem.comments}}
+      <br>
+      Search Status: {{searchItem.searchStatus}}
+      <br>
+      Score: {{searchItem.searchScore}}
+      
+      <hr>
+      <form>
+      	Mark As
         <input type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
         {% if button2 != None %}
 	<input type="button" value="{{ button2 }}" onclick="window.location.href='{{url2}}'"/>
@@ -49,7 +87,3 @@
   </body>
 </html>
 {% endautoescape %}
-<<<<<<< HEAD
-=======
-
->>>>>>> master

@@ -28,7 +28,6 @@ class ResultDetail(webapp2.RequestHandler):
                 projectKey = stringToKey(strKey, 'Project')
                 page = self.request.get('page')
                 strItemKey = self.request.get('item')
-                print "\nKey: %s"%strItemKey
 		itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
 		item = itemKey.get()
 		# Send the template to the details.html page	
@@ -48,3 +47,21 @@ class ResultDetail(webapp2.RequestHandler):
 		}
 		template = JINJA_ENVIRONMENT.get_template('www/details.html')
                 self.response.write(template.render(template_values))
+
+	def post(self):
+	        strKey = self.request.get('projectKey')
+                projectKey = stringToKey(strKey, 'Project')
+                page = self.request.get('page')
+                strItemKey = self.request.get('itemKey')
+                itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
+                item = itemKey.get()
+		if self.request.POST.get('safe', None):
+                        item.searchStatus = 'Safe'
+                elif self.request.POST.get('suspicious', None):
+                        item.searchStatus = 'Suspicious'
+		else:
+			item.searchStatus = 'New'
+		item.put()
+		self.redirect('/run?id='+strKey+'&page='+page+'&item='+strItemKey)
+
+

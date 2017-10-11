@@ -157,7 +157,6 @@
                                       <hr>
                                       <img src = "{{searchItem.imageLink}}" style="width:150px;height:100px;">
                                       <br>
-                                      <br>
                                       Platform:<b> {{searchItem.platform}}</b>
                                       <br>
                                       External Website:<b> <a href = "{{searchItem.website}}">{{searchItem.website[0:30]}}</a></b>
@@ -193,6 +192,7 @@
                                       Score: <b>{{searchItem.searchScore}}</b>
                                       
                                       <hr>
+                                      <button onclick="goBack()">Go Back</button>
                                     </div>
                                 </div>
                             </div>
@@ -219,6 +219,11 @@
                         &copy;
                         <script>
                             document.write(new Date().getFullYear())
+                        </script>
+                        <script>
+                          function goBack() {
+                              window.history.back();
+                          }
                         </script>
                         DEFENCE
                     </p>

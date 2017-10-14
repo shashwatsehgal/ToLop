@@ -76,12 +76,12 @@
                     </div>
                 </div> -->
                 <ul class="nav">
-                    <!-- <li class="active">
+                    <li class="active">
                         <a href="./dashboard.html">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
-                    </li> -->
+                    </li>
                     <li>
                         <a data-toggle="collapse" href="#pagesExamples">
                             <i class="material-icons">content_paste</i>
@@ -131,12 +131,9 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <!-- <li>
-                                <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="material-icons">dashboard</i>
-                                    <p class="hidden-lg hidden-md">Dashboard</p>
-                                </a>
-                            </li> -->
+                            <li>
+                                <button class="btn btn-primary btn-simple" onclick="window.location.href='{{url2}}'">Logout</button>
+                            </li>
                             
                         </ul>                        
                     </div>
@@ -151,7 +148,12 @@
                                     <i class="material-icons">assignment</i>
                                 </div>
                                 <div class="card-content">
-                                    <h3 class="card-title">Active Projects</h4>
+                                    <div>
+                                        <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">New Project</button>
+                                        <h3 class="card-title">Active Projects</h4>
+                                        <!-- <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">New Project</button> -->
+                                    </div>
+                                    <br>
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
@@ -160,8 +162,8 @@
                                                     <!-- <th>SKU</th> -->
                                                     <th>Created by</th>
                                                     <th>Created on</th>
-                                                    <th>Status</th>
-                                                    <th align="center">Actions</th>
+                                                    <!-- <th>Status</th> -->
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -171,29 +173,29 @@
                                                         <!-- <td> {{project.sku}} </td> -->
                                                         <td> {{project.author}} </td>
                                                         <td> {{project.date.strftime("%b %d, %Y")}} </td>
-                                                        <td> {{project.status}} </td>
+                                                        <!-- <td> {{project.status}} </td> -->
                                                         <td align="left">
                                                             <form action="/dashboard" method="post">
                                                                 <input name="key" type="text" value="{{project.key}}" hidden/>
                                                                 <input name="page" type="text" value="1" hidden/>
-                                                                <input name="edit" value="Edit" type="submit"/>
-                                                                <input name="delete" value="Delete" type="submit"/>
-                                                                <input name="run" value="Run" type="submit"/>
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #4caf50" name="run" value="Run" type="submit" />
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #ff9800"name="edit" value="Edit" type="submit" />
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #f54437"name="delete" value="Delete" type="submit" />                                                                
+                                                                <!-- <input name="edit" value="Edit" type="submit"/> -->
+                                                                <!-- <input name="delete" value="Delete" type="submit"/> -->
+                                                                <!-- <input name="run" value="Run" type="submit"/> -->
                                                             </form>
                                                       </td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-success" onclick="window.location.href='{{url1}}'">
+                                        <!-- <button class="btn btn-success" onclick="window.location.href='{{url1}}'">
                                             <span class="btn-label">
                                                 <i class="material-icons">check</i>
                                             </span>
                                             New Project
-                                        </button>
-                                        <button class="btn btn-danger" onclick="window.location.href='{{url2}}'">
-                                            <i class="material-icons">close</i> Logout
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </div>
                             </div>

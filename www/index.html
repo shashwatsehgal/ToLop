@@ -27,18 +27,17 @@
 
     <div class="col-md-4 col-md-offset-4" style="text-align:center">
       <div class="card">
-        <h3> {{ greeting }} </h3>
+          <h3> {{ greeting }} </h3>
           <br>
           <button class="btn btn-success" onclick="window.location.href='{{url1}}'"> {{ button1 }}</button>
           {% if button2 != None %}
           <button class="btn btn-danger" onclick="window.location.href='{{url2}}'"> {{ button2}} </button>
           {% endif %}
-
       </div>
 
     </div>
    
   </body>
-  
+
 </html>
 {% endautoescape %}

@@ -13815,3 +13815,12 @@ footer .btn {
         margin-bottom: 15px;
     }
 }
+
+/*Custom css*/
+
+.form-signin input[type="text"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }

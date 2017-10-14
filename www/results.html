@@ -130,15 +130,11 @@
                         <a class="navbar-brand" href="#"> Project Results</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- <li>
-                                <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="material-icons">dashboard</i>
-                                    <p class="hidden-lg hidden-md">Dashboard</p>
-                                </a>
-                            </li> -->
-                            
-                        </ul>                        
+                       <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button class="btn btn-primary btn-simple" onclick="window.location.href='{{url2}}'">Logout</button>
+                            </li>
+                        </ul>                       
                     </div>
                 </div>
             </nav>
@@ -154,12 +150,13 @@
                                     <h3 class="card-title">{{ greeting }}</h4>
 
                                         <form action="/run" method="get">
+                                            
                                             {% if currentPage|int > 1%} 
-                                                    <input name="page" type="button" value="Previous" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int - 1}}'">
+                                                    <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Previous" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int - 1}}'">
                                             {%endif%}
                                                 Page {{currentPage}} of {{numPages}}
                                             {% if currentPage|int < numPages|int%} 
-                                                <input name="page" type="button" value="Next" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int + 1}}'">
+                                                <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Next" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int + 1}}'">
                                             {%endif%}
                                         </form>
 
@@ -178,7 +175,7 @@
                                                   <!-- <th> Post Date </th> -->
                                                   <th> Score </th>
                                                   <th> Status </th>
-                                                  <th> Actions </th>                                                  
+                                                  <th></th>                                                  
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -196,26 +193,33 @@
                                                         <td> {{item.distance}}</td>
                                                         <td align="center"> {{item.searchStatus}} </td>
                                                         <td align="center">
-                                                        <form action="/run" method="post">
-                                                            <input name="projectKey" type="text" value="{{projectID}}" hidden/>
-                                                            <input name="page" type="text" value="{{currentPage}}" hidden/>
-                                                            <input name="itemKey" type="text" value="{{item.key}}" hidden/>
-                                                            <input name="safe" value="Safe" type="submit"/>
-                                                            <input name="suspicious" value="Suspicious" type="submit"/>
-                                                            <input name="details" value="Details" type="submit"/>
-                                                        </form>
+                                                            <form action="/run" method="post">
+                                                                <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                                                                <input name="page" type="text" value="{{currentPage}}" hidden/>
+                                                                <input name="itemKey" type="text" value="{{item.key}}" hidden/>
+                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe"type="submit">
+                                                                    <i class="material-icons">check</i>
+                                                                </button>
+                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
+                                                                    <i class="material-icons">warning</i>
+                                                                </button>
+                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
+                                                                    <i class="material-icons">more_horiz</i>
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>
                                         </table>
-					    <hr>
-                                            <form>
-                                                <input type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
-                                                {% if button2 != None %}
-                                                <input type="button" value="{{ button2 }}" onclick="window.location.href='{{url2}}'"/>
-                                                {% endif %}
-					    </form>
+					                    <hr>
+                                        <form>
+                                           
+                                            <input class="btn btn-success" type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
+                                            {% if button2 != None %}
+                                            <input class="btn btn-danger" type="button" value="{{ button2 }}" onclick="window.location.href='{{url2}}'"/>
+                                            {% endif %}
+					                    </form>
 
 					    <form action="/run" method="post">
 					    	<input name="projectKey" type="text" value="{{projectID}}" hidden/>

@@ -149,9 +149,14 @@
                                 </div>
                                 <div class="card-content">
                                     <div>
-                                        <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">New Project</button>
+                                        <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">
+                                        <span class="btn-label">
+                                                <i class="material-icons">add</i>
+                                            </span>
+                                        New Project
+                                        </button>
                                         <h3 class="card-title">Active Projects</h4>
-                                        <!-- <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">New Project</button> -->
+                                        
                                     </div>
                                     <br>
                                     <div class="table-responsive">
@@ -174,7 +179,7 @@
                                                         <td> {{project.author}} </td>
                                                         <td> {{project.date.strftime("%b %d, %Y")}} </td>
                                                         <!-- <td> {{project.status}} </td> -->
-                                                        <td align="left">
+                                                        <td align="center">
                                                             <form action="/dashboard" method="post">
                                                                 <input name="key" type="text" value="{{project.key}}" hidden/>
                                                                 <input name="page" type="text" value="1" hidden/>

@@ -185,12 +185,27 @@
                                       Post Date: <b>{{searchItem.postDate}}</b>
                                       <br>
                                       <br>
-                                      Comments: <b>{{searchItem.comments}}</b>
-                                      <br>
                                       Search Status: <b>{{searchItem.searchStatus}}</b>
                                       <br>
                                       Score: <b>{{searchItem.searchScore}}</b>
-                                      
+                                      <form method='post'>
+				      	<hr>
+					Mark as: 
+					<input name="projectKey" type="text" value="{{projectKey}}" hidden/>
+					<input name="page" type="text" value="{{page}}" hidden/>
+					<input name="itemKey" type="text" value="{{itemKey}}" hidden/>
+					<input name="safe" type="submit" value="Safe"/>
+					<input name="suspicious" type="submit" value="Suspicious"/>
+					<input name="new" type="submit" value="New"/>
+                                      	<br>
+                                      	<br>
+					Comments: 
+                                      	<br>
+					<textarea name="comments" rows="10" cols="80">{{searchItem.comments}}</textarea>  
+					<textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
+                                      	<br>
+					<input type="submit" value="Add Comment"/>
+				      </form>
                                       <hr>
                                       <button onclick="goBack()">Go Back</button>
                                     </div>

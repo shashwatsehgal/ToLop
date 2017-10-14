@@ -32,13 +32,13 @@ def urlencode(s):
 
 # [START RunProject]
 class RunProject(webapp2.RequestHandler):
-	# Saves search results in Datastore. Parameters are newKey (key of the project) and searchResults (output for Finding API call 
+	# Saves search results in Datastore. Parameters are newKey (key of the project) and searchResults (output for Finding API call) 
 	def saveResults(self, newKey, searchResults):
 		for item in searchResults:
 			# Search result is stored as an entity with the project entity as the parent
 			saveResult = SearchResult(parent = newKey)
 			
-			# Building the parameters from the Finding API call output)
+			# Building the parameters from the Finding API call output
 			saveResult.platform = 'eBay'
 			saveResult.website = item.viewItemURL
 			saveResult.location = item.location
@@ -60,10 +60,10 @@ class RunProject(webapp2.RequestHandler):
         		saveResult.title = item.title
         		if hasattr(item, 'sellerInfo'):
 				saveResult.seller = item.sellerInfo.sellerUserName
-        			saveResult.sellerRating = item.sellerInfo.sellerFeedbackScore
+        			saveResult.sellerRating = item.sellerInfo.feedbackScore
 			saveResult.postDate = item.listingInfo.startTime
 			
-        		saveResult.comments = 'TO BE FILLED'
+        		saveResult.comments = ''
         		#saveResult.image = ndb.BlobProperty()
         		saveResult.imageLink = item.galleryURL
 			saveResult.searchStatus = "New"
@@ -91,7 +91,8 @@ class RunProject(webapp2.RequestHandler):
 					{'name': 'Condition', 'value': 'New'},
 					{'name': 'MaxDistance', 'value': '100'}
 				],
-				'sortOrder': 'DistanceNearest'
+				'sortOrder': 'DistanceNearest',
+				'outputSelector': 'SellerInfo'
 			})
 			
 			# Check if there is at least 1 result on eBay
@@ -154,7 +155,8 @@ class RunProject(webapp2.RequestHandler):
 				'url2': ('/dashboard'),
 				'button1': 'Save Results',
 				'button2': 'Return to Dashboard',
-				'searchResults': searchResults
+				'searchResults': searchResults,
+				'comments': existingProject.comments 
 			}
 
 		# Send the template to the results.html page	
@@ -167,7 +169,8 @@ class RunProject(webapp2.RequestHandler):
                 projectKey = stringToKey(strKey, 'Project')
                 page = self.request.get('page')
 		strItemKey = self.request.get('itemKey')
-		itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
+		if strItemKey == None:
+			itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
 		if self.request.POST.get('safe', None):
                         existingItem = itemKey.get()
 			existingItem.searchStatus = "Safe"
@@ -180,3 +183,8 @@ class RunProject(webapp2.RequestHandler):
 			self.redirect('/run?id='+strKey+'&page='+page)
                 elif self.request.POST.get('details', None):
                         self.redirect('/details?id='+strKey+'&page='+page+'&item='+strItemKey)
+                elif self.request.POST.get('newComment', None):
+			existingProject = projectKey.get()
+			existingProject.comments = existingProject.comments + '\nOn '+datetime.now().strftime("%Y-%m-%d")+', '+users.get_current_user().nickname()+" wrote: "+self.request.POST.get('newComment',None)+'\n--------------------------------------------------------------------------------\n'
+			existingProject.put()
+			self.redirect('/run?id='+strKey+'&page='+page)

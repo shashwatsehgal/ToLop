@@ -207,12 +207,26 @@
                                                 {% endfor %}
                                             </tbody>
                                         </table>
+					    <hr>
                                             <form>
                                                 <input type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
                                                 {% if button2 != None %}
                                                 <input type="button" value="{{ button2 }}" onclick="window.location.href='{{url2}}'"/>
                                                 {% endif %}
-                                            </form>
+					    </form>
+
+					    <form action="/run" method="post">
+					    	<input name="projectKey" type="text" value="{{projectID}}" hidden/>
+						<input name="page" type="text" value="{{currentPage}}" hidden/>
+					   	<br>
+					    	<br>
+                                            	Comments: 
+					    	<br>
+					    	<textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
+					    	<textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
+					    	<br>
+					    	<input type="submit" value="Add Comment"/>
+					    </form>
                                     </div>
                                 </div>
                             </div>

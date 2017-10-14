@@ -157,7 +157,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Item Name</th>
-                                                    <th>SKU</th>
+                                                    <!-- <th>SKU</th> -->
                                                     <th>Created by</th>
                                                     <th>Created on</th>
                                                     <th>Status</th>
@@ -168,7 +168,7 @@
                                                 {% for project in projects %}
                                                     <tr>
                                                         <td> {{project.projectName}} </td>
-                                                        <td> {{project.sku}} </td>
+                                                        <!-- <td> {{project.sku}} </td> -->
                                                         <td> {{project.author}} </td>
                                                         <td> {{project.date.strftime("%b %d, %Y")}} </td>
                                                         <td> {{project.status}} </td>

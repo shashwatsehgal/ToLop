@@ -154,7 +154,7 @@
                                             {% if currentPage|int > 1%} 
                                                     <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Previous" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int - 1}}'">
                                             {%endif%}
-                                                Page {{currentPage}} of {{numPages}}
+                                                <b>{{currentPage}} of {{numPages}}</b>
                                             {% if currentPage|int < numPages|int%} 
                                                 <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Next" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int + 1}}'">
                                             {%endif%}
@@ -190,7 +190,7 @@
                                                        <!--  <td align="center"> {{"${:,.2f}".format(item.shippingCost)}} </td> -->
                                                         <!-- <td align="center"> {{item.condition}} </td>-->
                                                         <!-- <td align="center"> {{item.postDate.strftime("%b %d, %Y") if item.postDate}} </td> -->
-                                                        <td> {{item.distance}}</td>
+                                                        <td align="center"> {{item.distance}}</td>
                                                         <td align="center"> {{item.searchStatus}} </td>
                                                         <td align="center">
                                                             <form action="/run" method="post">

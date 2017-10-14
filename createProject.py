@@ -88,7 +88,8 @@ class CreateProject(webapp2.RequestHandler):
                                 newProject.zipCode = int(self.request.get('zipCode'))
                         newProject.website = self.request.get('website')
                         newProject.platforms = self.request.get('platform', allow_multiple=True)
-                        newProject.put()
+			newProject.comments = ''
+			newProject.put()
                         self.redirect('/dashboard')
                 elif self.request.POST.get('return', None):
                         key = self.redirect('/dashboard')

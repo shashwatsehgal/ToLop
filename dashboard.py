@@ -29,12 +29,9 @@ class Dashboard(webapp2.RequestHandler):
                 		'greeting': 'Dashboard',
                 		'url1': ('/create'),
 		                'url2': users.create_logout_url('/'),
-                		'button1': 'New Project',
-		                'button2': 'Logout',
                 		'projects': projects
                 	}
             		template = JINJA_ENVIRONMENT.get_template('www/dashboard.html')
-            		self.response.write(template.render(template_values))
         	else:
             		template_values = {
                 		'greeting': 'You are logged out. Please sign in to proceed',
@@ -42,7 +39,7 @@ class Dashboard(webapp2.RequestHandler):
                 		'button1': 'Login',
                 		'button2': None
                 	}
-            	template = JINJA_ENVIRONMENT.get_template('www/index.html')
+            		template = JINJA_ENVIRONMENT.get_template('www/index.html')
             	self.response.write(template.render(template_values))
 
 	def post(self):

@@ -169,7 +169,7 @@ class RunProject(webapp2.RequestHandler):
                 projectKey = stringToKey(strKey, 'Project')
                 page = self.request.get('page')
 		strItemKey = self.request.get('itemKey')
-		if strItemKey == None:
+		if strItemKey != None:
 			itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
 		if self.request.POST.get('safe', None):
                         existingItem = itemKey.get()

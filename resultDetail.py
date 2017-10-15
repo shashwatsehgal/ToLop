@@ -48,15 +48,18 @@ class ResultDetail(webapp2.RequestHandler):
                 strItemKey = self.request.get('itemKey')
                 itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
                 item = itemKey.get()
-		if self.request.POST.get('safe', None):
-                        item.searchStatus = 'Safe'
-                elif self.request.POST.get('suspicious', None):
-                        item.searchStatus = 'Suspicious'
-                elif self.request.POST.get('new', None):
-                        item.searchStatus = 'New'
+		if self.request.POST.get('results', None):
+			self.redirect('/run?id='+strKey+'&page='+page)
 		else:
-			item.comments = item.comments+'\nOn '+datetime.now().strftime("%Y-%m-%d")+', '+users.get_current_user().nickname()+" wrote: "+self.request.POST.get('newComment',None)+'\n--------------------------------------------------------------------------------\n'
-		item.put()
-		self.redirect('/details?id='+strKey+'&page='+page+'&item='+strItemKey)
+			if self.request.POST.get('safe', None):
+                        	item.searchStatus = 'Safe'
+	                elif self.request.POST.get('suspicious', None):
+        	                item.searchStatus = 'Suspicious'
+                	elif self.request.POST.get('new', None):
+       	                 item.searchStatus = 'New'
+			elif self.request.POST.get('newComment', None):
+				item.comments = item.comments+'\nOn '+datetime.now().strftime("%Y-%m-%d")+', '+users.get_current_user().nickname()+" wrote: "+self.request.POST.get('newComment',None)+'\n--------------------------------------------------------------------------------\n'
+			item.put()
+			self.redirect('/details?id='+strKey+'&page='+page+'&item='+strItemKey)
 
 

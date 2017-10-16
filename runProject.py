@@ -13,6 +13,7 @@ import jinja2
 import webapp2
 
 from baseClasses import *
+from scoreComputer import ScoreComputer
 
 JINJA_ENVIRONMENT = jinja2.Environment(
         loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -47,7 +48,7 @@ class RunProject(webapp2.RequestHandler):
 				saveResult.distance = float(item.distance.value)
 			else:
 				saveResult.zipCode = 0
-				saveResult.distance = 0
+				saveResult.distance = 999999
 			saveResult.price = float(item.sellingStatus.currentPrice.value)
         		if item.shippingInfo.shippingServiceCost == None:
 				saveResult.shippingCost = 0

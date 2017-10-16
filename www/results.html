@@ -190,7 +190,7 @@
                                                        <!--  <td align="center"> {{"${:,.2f}".format(item.shippingCost)}} </td> -->
                                                         <!-- <td align="center"> {{item.condition}} </td>-->
                                                         <!-- <td align="center"> {{item.postDate.strftime("%b %d, %Y") if item.postDate}} </td> -->
-                                                        <td align="center"> {{item.distance}}</td>
+                                                        <td align="center"> {{"{:,.2f}".format(item.searchScore)}} </td>
                                                         <td align="center"> {{item.searchStatus}} </td>
                                                         <td align="center">
                                                             <form action="/run" method="post">

@@ -20,3 +20,20 @@ indexes:
   ancestor: yes
   properties:
   - name: distance
+
+- kind: SearchResult
+  ancestor: yes
+  properties:
+  - name: distance
+    direction: desc
+
+- kind: SearchResult
+  ancestor: yes
+  properties:
+  - name: searchScore
+
+- kind: SearchResult
+  ancestor: yes
+  properties:
+  - name: searchScore
+    direction: desc

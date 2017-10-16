@@ -33,17 +33,10 @@ class ResultDetail(webapp2.RequestHandler):
 		# Send the template to the details.html page	
                 template_values = {
 			'greeting': 'Details for: '+item.title,
-			'button1': 'Safe',
-			'button2': 'Suspicious',
-			'button3': 'New',
-			'button4': 'Return to Results',
-			'url1': None,
-			'url2': None,
-			'url3': None,
-			'url4': None,
 			'projectKey': projectKey,
 			'page': page,
-			'searchItem': item
+			'searchItem': item,
+			'itemKey': itemKey
 		}
 		template = JINJA_ENVIRONMENT.get_template('www/details.html')
                 self.response.write(template.render(template_values))
@@ -55,13 +48,18 @@ class ResultDetail(webapp2.RequestHandler):
                 strItemKey = self.request.get('itemKey')
                 itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
                 item = itemKey.get()
-		if self.request.POST.get('safe', None):
-                        item.searchStatus = 'Safe'
-                elif self.request.POST.get('suspicious', None):
-                        item.searchStatus = 'Suspicious'
+		if self.request.POST.get('results', None):
+			self.redirect('/run?id='+strKey+'&page='+page)
 		else:
-			item.searchStatus = 'New'
-		item.put()
-		self.redirect('/run?id='+strKey+'&page='+page+'&item='+strItemKey)
+			if self.request.POST.get('safe', None):
+                        	item.searchStatus = 'Safe'
+	                elif self.request.POST.get('suspicious', None):
+        	                item.searchStatus = 'Suspicious'
+                	elif self.request.POST.get('new', None):
+       	                 item.searchStatus = 'New'
+			elif self.request.POST.get('newComment', None):
+				item.comments = item.comments+'\nOn '+datetime.now().strftime("%Y-%m-%d")+', '+users.get_current_user().nickname()+" wrote: "+self.request.POST.get('newComment',None)+'\n--------------------------------------------------------------------------------\n'
+			item.put()
+			self.redirect('/details?id='+strKey+'&page='+page+'&item='+strItemKey)
 
 

@@ -59,6 +59,7 @@ class Project(ndb.Model):
         zipCode = ndb.IntegerProperty()
         website = ndb.StringProperty()
         status = ndb.StringProperty()
+	comments = ndb.TextProperty() 
 
         platforms = [
                 SearchPlatform(

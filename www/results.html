@@ -154,7 +154,9 @@
                                             {% if currentPage|int > 1%} 
                                                     <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Previous" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int - 1}}'">
                                             {%endif%}
-                                                <b>{{currentPage}} of {{numPages}}</b>
+                                            {% if numPages|int > 0%} 
+					    	<b>{{currentPage}} of {{numPages}}</b>
+                                            {%endif%}
                                             {% if currentPage|int < numPages|int%} 
                                                 <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Next" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int + 1}}'">
                                             {%endif%}
@@ -179,6 +181,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            	{% if numResults|int > 0%} 
                                                 {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
                                                     <tr>
                                                         <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
@@ -190,7 +193,7 @@
                                                        <!--  <td align="center"> {{"${:,.2f}".format(item.shippingCost)}} </td> -->
                                                         <!-- <td align="center"> {{item.condition}} </td>-->
                                                         <!-- <td align="center"> {{item.postDate.strftime("%b %d, %Y") if item.postDate}} </td> -->
-                                                        <td align="center"> {{"{:,.2f}".format(item.searchScore)}} </td>
+                                                        <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
                                                         <td align="center"> {{item.searchStatus}} </td>
                                                         <td align="center">
                                                             <form action="/run" method="post">
@@ -210,6 +213,7 @@
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
+                                                {% endif %}
                                             </tbody>
                                         </table>
 					                    <hr>

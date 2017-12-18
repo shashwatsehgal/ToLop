@@ -19,7 +19,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 # [START SearchResult]
 class SearchResult(ndb.Model):
 	platform = ndb.StringProperty()
-	zipCode = ndb.IntegerProperty()
+	zipCode = ndb.StringProperty()
 	distance = ndb.FloatProperty()
 	website = ndb.StringProperty()
 	price = ndb.FloatProperty()
@@ -38,6 +38,17 @@ class SearchResult(ndb.Model):
 	searchScore = ndb.FloatProperty()
 # [END SearchResult]
 
+# [START WatchedSeller]
+class WatchedSeller(ndb.Model):
+	userName = ndb.StringProperty()
+	url = ndb.StringProperty()
+	watchedResult = SearchResult()
+	result1 = SearchResult()
+	result2 = SearchResult()
+	result3 = SearchResult()
+	result4 = SearchResult()
+	result5 = SearchResult()
+# [END WatchedSeller]
 
 # [START SearchPlatform]
 class SearchPlatform(ndb.Model):
@@ -56,7 +67,7 @@ class Project(ndb.Model):
         sku = ndb.IntegerProperty()
         dateOfTheft = ndb.DateTimeProperty(auto_now_add=True)
         listPrice = ndb.FloatProperty()
-        zipCode = ndb.IntegerProperty()
+        zipCode = ndb.StringProperty()
         website = ndb.StringProperty()
         status = ndb.StringProperty()
 	comments = ndb.TextProperty() 

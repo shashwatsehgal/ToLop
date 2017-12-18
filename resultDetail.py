@@ -24,22 +24,37 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 # [START ResultDetail]
 class ResultDetail(webapp2.RequestHandler):
 	def get(self):
-		strKey = self.request.get('id')
-                projectKey = stringToKey(strKey, 'Project')
-                page = self.request.get('page')
-                strItemKey = self.request.get('item')
-		itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
-		item = itemKey.get()
-		# Send the template to the details.html page	
-                template_values = {
-			'greeting': 'Details for: '+item.title,
-			'projectKey': projectKey,
-			'page': page,
-			'searchItem': item,
-			'itemKey': itemKey
-		}
-		template = JINJA_ENVIRONMENT.get_template('www/details.html')
-                self.response.write(template.render(template_values))
+		# Gets the current user details and checks whether the user has logged in or not
+                user = users.get_current_user()
+		if user:
+			# User has logged in correctly
+			# Reads the result from the datastore
+			strKey = self.request.get('id')
+                	projectKey = stringToKey(strKey, 'Project')
+                	page = self.request.get('page')
+	                strItemKey = self.request.get('item')
+			itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
+			item = itemKey.get()
+			# Send the template to the details.html page	
+	                template_values = {
+				'greeting': 'Details for: '+item.title,
+				'projectKey': projectKey,
+				'page': page,
+				'searchItem': item,
+				'itemKey': itemKey
+			}
+			template = JINJA_ENVIRONMENT.get_template('www/details.html')
+             		self.response.write(template.render(template_values))
+                else:
+                        # Not logged in. Redirects to login page
+                        template_values = {
+                                'greeting': 'You are logged out. Please sign in to proceed',
+                                'url1': users.create_login_url('/dashboard'),
+                                'button1': 'Login',
+                                'button2': None,
+                        }
+                        template = JINJA_ENVIRONMENT.get_template('www/index.html')
+                        self.response.write(template.render(template_values))
 
 	def post(self):
 	        strKey = self.request.get('projectKey')

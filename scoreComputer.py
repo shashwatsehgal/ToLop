@@ -14,14 +14,14 @@ class ScoreComputer:
                 self.listPrice) * self.__getDistanceScore(item.distance)
 
     def __getPriceScore(self, sellingPrice, shippingCost, listPrice):
-        discount = listPrice - sellingPrice - shippingCost
+	discount = listPrice - sellingPrice - shippingCost
         if discount < 0:
             return 0
         sigma = listPrice / 10;
         return 1 - math.exp(- discount * discount / (2 * sigma * sigma)) / (sigma * 2.506628)
 
     def __getDistanceScore(self, distance):
-        try:
+	try:
             return 1 / (1 + math.exp(distance - 1000))
         except OverflowError:
             return 0

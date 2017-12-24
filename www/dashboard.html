@@ -165,7 +165,49 @@
                         </div>
                     </div>                    
             </div>
-            <footer class="footer">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-icon" data-background-color="rose">
+                                    <i class="material-icons">assignment</i>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="card-title">Watched Sellers</h4>
+                                    <br>
+				    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>User Name</th>
+                                                    <th>Rating (out of 100)</th>
+                                                    <th>Number of Posts</th>
+                                                    <th>Times Flagged</th>
+                                                    <th>Suspicious Item</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for Seller in watchedSellers %}
+                                                    <tr>
+                                                        <td> <a href="{{Seller.url}}"> {{Seller.userName}} </td>
+                                                        <td align="center"> {{Seller.sellerRating}} </td>
+                                                        <td align="center"> {{Seller.numberOfPosts}} </td>
+                                                        <td align="center"> {{Seller.timesFlagged}} </td>
+                                                        <td> <a href="{{Seller.watchedResultURL}}"> {{Seller.watchedResultTitle}} </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+            </div>
+ 
+	    <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
                         <ul>

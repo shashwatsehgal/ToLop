@@ -39,8 +39,23 @@ class RunProject(webapp2.RequestHandler):
 	sellerObj = WatchedSeller()
 	sellerObj.userName = searchResult.seller
 	sellerObj.url = "https://www.ebay.com/usr/"+searchResult.seller
-#	sellerObj.watchedResult = 
-    	return sellerObj
+	sellerObj.watchedResultTitle = searchResult.title 
+	sellerObj.watchedResultURL = searchResult.website
+	sellerObj.sellerRating = searchResult.sellerRating
+    	sellerObj.timesFlagged = 1
+	api = finding(siteid ='EBAY-US', appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
+	api.execute('findItemsAdvanced', {
+	    'keywords': ['toys r us'],
+	    'itemFilter': [
+		{'name': 'ListedIn', 'value': 'EBAY-US'},
+		{'name': 'LocatedIn', 'value': 'US'},
+		{'name': 'Seller', 'value': searchResult.seller}
+	    ],
+	    'sortOrder': 'EndTimeSoonest',
+	    'outputSelector': 'SellerInfo'
+	})
+	sellerObj.numberOfPosts = int(api.response.reply.paginationOutput.totalEntries)
+	return sellerObj
 	    
     # Saves search results in Datastore. Parameters are newKey (key of the project) and searchResults (output for Finding API call) 
     def saveResults(self, newKey, searchResults):
@@ -70,9 +85,8 @@ class RunProject(webapp2.RequestHandler):
             saveResult.title = item.title
             if hasattr(item, 'sellerInfo'):
                 saveResult.seller = item.sellerInfo.sellerUserName
-                saveResult.sellerRating = item.sellerInfo.feedbackScore
+                saveResult.sellerRating = float(item.sellerInfo.positiveFeedbackPercent)
             saveResult.postDate = item.listingInfo.startTime
-            
             saveResult.comments = ''
             #saveResult.image = ndb.BlobProperty()
             saveResult.imageLink = item.galleryURL
@@ -162,7 +176,6 @@ class RunProject(webapp2.RequestHandler):
 		numResults = 0
 		for item in searchResults:
 		    numResults = numResults + 1
-		    print(item.searchScore)
 		numPages = (int(numResults) - int(numResults) % resultsPerPage)//resultsPerPage+ 1 
 		template_values = {
 		    'numResults': numResults,
@@ -200,18 +213,41 @@ class RunProject(webapp2.RequestHandler):
         strItemKey = self.request.get('itemKey')
         if strItemKey != None:
             itemKey = stringToKeyWithParent(strItemKey, 'Project', 'SearchResult')
-        if self.request.POST.get('safe', None):
+        # If-else loop for how the user interacts with the results
+	if self.request.POST.get('safe', None):
+	    # User marks a result as safe
             existingItem = itemKey.get()
             existingItem.searchStatus = "Safe"
             existingItem.put()
-            self.redirect('/run?id='+strKey+'&page='+page)
+            # Remove the seller from the Suspicious Seller List
+	    # Check if the seller is in the suspicious seller list. If yes, then decrease the number of suspicious posts by 1
+	    searchQuery = WatchedSeller.query(WatchedSeller.userName == existingItem.seller)
+	    for s in searchQuery:
+		s.timesFlagged = s.timesFlagged - 1
+		if s.timesFlagged == 0:
+		    s.key.delete()
+		else:
+		    s.put() 
+	    self.redirect('/run?id='+strKey+'&page='+page)
         elif self.request.POST.get('suspicious', None):
-            existingItem = itemKey.get()
-            existingItem.searchStatus = "Suspicious"
-            existingItem.put()
-	    suspiciousSeller = getSellerInfo(existingItem)
-	    suspiciousSeller.put()
-            self.redirect('/run?id='+strKey+'&page='+page)
+            # User marks a result as suspicious
+	    existingItem = itemKey.get()
+            if existingItem.searchStatus != "Suspicious":
+		    existingItem.searchStatus = "Suspicious"
+		    existingItem.put()
+		    # Add the seller to the Suspicious Seller List
+		    # Check if the seller is already in the suspicious seller list. If yes, then increase the number of suspicious posts by that seller by 1
+		    searchQuery = WatchedSeller.query(WatchedSeller.userName == existingItem.seller)
+		    isSellerInList = 0
+		    for s in searchQuery:
+			isSellerInList = isSellerInList + 1
+			s.timesFlagged = s.timesFlagged + 1
+			s.put() 
+		    # If seller is not in the suspicious list, add to the list
+		    if isSellerInList == 0:
+			suspiciousSeller = self.getSellerInfo(existingItem)
+			suspiciousSeller.put()
+	    self.redirect('/run?id='+strKey+'&page='+page)
         elif self.request.POST.get('details', None):
             self.redirect('/details?id='+strKey+'&page='+page+'&item='+strItemKey)
         elif self.request.POST.get('newComment', None):

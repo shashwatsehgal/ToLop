@@ -10,6 +10,8 @@ import jinja2
 import webapp2
 
 from baseClasses import *
+from authModel import *
+from authBaseCode import *
 
 JINJA_ENVIRONMENT = jinja2.Environment(
         loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -19,52 +21,38 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 
 # [START CreateProject]
-class CreateProject(webapp2.RequestHandler):
-        def get(self):
-                # Gets the current user details and checks whether the user has logged in or not
-		user = users.get_current_user()
-		if user:
-			# User has logged in correctly
-			# Checks whether the user is creating a new project or opening an existing project
-                        if self.request.get('id', None):
-				# Loads an existing project
-                                strKey = self.request.get('id')
-                                newKey = stringToKey(strKey, 'Project')
-                                existingProject = newKey.get()
-                                template_values = {
-                                        'greeting': 'Edit Project',
-                                        'projectName': existingProject.projectName,
-                                        'author': existingProject.author,
-                                        'date': existingProject.date.strftime("%m/%d/%Y"),
-                                        'sku': existingProject.sku,
-                                        'dateOfTheft': existingProject.dateOfTheft.strftime("%m/%d/%Y"),
-                                        'listPrice': existingProject.listPrice,
-                                        'zipCode': existingProject.zipCode,
-                                        'website': existingProject.website,
-                                        'status': existingProject.status,
-                                        'strKey': strKey
-                                }
-                        else:
-                                # Creates a new project
-				nickname = user.nickname()
-                                greeting = 'Create New Project'
-                                template_values = {
-                                        'greeting': greeting,
-                                        'author': nickname,
-                                        'date': datetime.today().strftime('%m/%d/%Y')
-                                }
-                        template = JINJA_ENVIRONMENT.get_template('www/create.html')
-                        self.response.write(template.render(template_values))
-                else:
-                        # Not logged in. Redirects to login page
-			template_values = {
-                                'greeting': 'You are logged out. Please sign in to proceed',
-                                'url1': users.create_login_url('/dashboard'),
-                                'button1': 'Login',
-                                'button2': None,
+class CreateProject(BaseHandler):
+        @user_required
+	def get(self):
+		# Checks whether the user is creating a new project or opening an existing project
+               	if self.request.get('id', None):
+			# Loads an existing project
+                        strKey = self.request.get('id')
+                        newKey = stringToKey(strKey, 'Project')
+                        existingProject = newKey.get()
+                        template_values = {
+                                'greeting': 'Edit Project',
+                                'projectName': existingProject.projectName,
+                                'author': existingProject.author,
+                                'date': existingProject.date.strftime("%m/%d/%Y"),
+                                'sku': existingProject.sku,
+                                'dateOfTheft': existingProject.dateOfTheft.strftime("%m/%d/%Y"),
+                                'listPrice': existingProject.listPrice,
+                                'zipCode': existingProject.zipCode,
+                                'website': existingProject.website,
+                                'status': existingProject.status,
+                                'strKey': strKey
                         }
-                        template = JINJA_ENVIRONMENT.get_template('www/index.html')
-                        self.response.write(template.render(template_values))
+                else:
+                        # Creates a new project
+                        greeting = 'Create New Project'
+                        template_values = {
+                                'greeting': greeting,
+                                'author': self.user.name + ' ' + self.user.last_name,
+                                'date': datetime.today().strftime('%m/%d/%Y')
+                        }
+                template = JINJA_ENVIRONMENT.get_template('www/create.html')
+                self.response.write(template.render(template_values))
 
 
         def post(self):

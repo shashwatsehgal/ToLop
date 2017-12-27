@@ -10,6 +10,8 @@ import jinja2
 import webapp2
 
 from baseClasses import *
+from authModel import *
+from authBaseCode import *
 
 JINJA_ENVIRONMENT = jinja2.Environment(
         loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -19,30 +21,20 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 
 # [START Dashboard]
-class Dashboard(webapp2.RequestHandler):
-    	def get(self):
-        	user = users.get_current_user()
-       		if user:
-            		project_query = Project.query()
-            		projects = project_query.fetch(10)
-			watchedSellers_query = WatchedSeller.query()
-			watchedSellers = watchedSellers_query.fetch()
-            		template_values = {
-                		'greeting': 'Dashboard',
-                		'url1': ('/create'),
-		                'url2': users.create_logout_url('/'),
-                		'projects': projects,
-				'watchedSellers': watchedSellers
-                	}
-            		template = JINJA_ENVIRONMENT.get_template('www/dashboard.html')
-        	else:
-            		template_values = {
-                		'greeting': 'You are logged out. Please sign in to proceed',
-                		'url1': users.create_login_url('/dashboard'),
-                		'button1': 'Login',
-                		'button2': None
-                	}
-            		template = JINJA_ENVIRONMENT.get_template('www/index.html')
+class Dashboard(BaseHandler):
+    	@user_required
+	def get(self):
+            	project_query = Project.query()
+            	projects = project_query.fetch(10)
+		watchedSellers_query = WatchedSeller.query()
+		watchedSellers = watchedSellers_query.fetch()
+            	template_values = {
+                	'greeting': 'Dashboard',
+                	'url1': ('/create'),
+                	'projects': projects,
+			'watchedSellers': watchedSellers
+                }
+            	template = JINJA_ENVIRONMENT.get_template('www/dashboard.html')
             	self.response.write(template.render(template_values))
 
 	def post(self):

@@ -130,13 +130,12 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <!-- <li>
-                                <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="material-icons">dashboard</i>
-                                    <p class="hidden-lg hidden-md">Dashboard</p>
-                                </a>
-                            </li> -->
-                            
+                            <li>
+			        <button class="btn btn-primary btn-simple" onclick="window.location.href='/profile'">Profile</button>
+			    </li>
+                            <li>
+			        <button class="btn btn-primary btn-simple" onclick="window.location.href='/logout'">Logout</button>
+			    </li>
                         </ul>                        
                     </div>
                 </div>
@@ -217,7 +216,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <!--
+					    <div class="row">
                                                 <label class="col-sm-2 label-on-left">Website</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-group label-floating is-empty">
@@ -226,8 +226,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <hr>
-                                            <b> Which platform(s) do you want to search? </b> -->
                                             <div class="row">
                                             <label class="col-sm-2 label-on-left">Which platform(s) do you want to search? </label>
                                             <div class="col-sm-10 checkbox-radios">
@@ -262,7 +260,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                             <hr>
                                               <input name="key" value="{{strKey}}" type="text" hidden/>
                                               <input name="save" value="Save" type="submit"/>

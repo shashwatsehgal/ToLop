@@ -40,6 +40,7 @@ app = webapp2.WSGIApplication([
     ('/create', CreateProject),
     ('/run', RunProject),
     ('/details', ResultDetail),
+    webapp2.Route('/<user_id:\d+>-<signup_token:.+>', handler=VerificationHandler, name='verification')
 ], debug=True, config=config)
 # [END app]
 

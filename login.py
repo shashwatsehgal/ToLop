@@ -105,17 +105,12 @@ class ForgotPassword(BaseHandler):
     		user_id = user.get_id()
     		token = self.user_model.create_signup_token(user_id)
 
-    		# verification_url = self.uri_for('verification', type='p', user_id=user_id,
-      		#	signup_token=token, _full=True)
-
-    		# msg = 'Send an email to user in order to reset their password. \
-          	#	They will be able to do so by visiting <a href="{url}">{url}</a>'
-
-    		# self.display_message(msg.format(url=verification_url))
+    		verification_url = self.uri_for('verification', user_id=user_id,
+      			signup_token=token, _full=True)
 		mail.send_mail(sender='shashwatsehgal@gmail.com',
                 	to=user.email_address,
                    	subject="Password Reset",
-                   	body="Please click here to reset your password: +verification_url+\n\nThe DEFENCE.com Team")	
+                   	body="Please click here to reset your password: "+verification_url+"\n\nThe DEFENCE.com Team")	
 		self._serve_page()
 
   	def _serve_page(self, not_found=False, email_sent=True):
@@ -127,4 +122,27 @@ class ForgotPassword(BaseHandler):
     		}
 		template = JINJA_ENVIRONMENT.get_template('www/forgot.html')
                 self.response.write(template.render(params))
-# [END ForgotPassiword]
+# [END ForgotPassword]
+
+class VerificationHandler(BaseHandler):
+  	def get(self, *args, **kwargs):
+    		user = None
+    		user_id = kwargs['user_id']
+    		signup_token = kwargs['signup_token']
+    
+    		user, ts = self.user_model.get_by_auth_token(int(user_id), signup_token, 'signup')
+
+    		if not user:
+      			logging.info('Could not find any user with id "%s" signup token "%s"', user_id, signup_token)
+      			self.abort(404)
+
+    		# store user data in the session
+    		self.auth.set_session(self.auth.store.user_to_dict(user), remember=True)
+
+    		# supply user to the page
+    		params = {
+    			'user': user,
+      			'token': signup_token
+    		}
+		template = JINJA_ENVIRONMENT.get_template('www/resetPassword.html')
+                self.response.write(template.render(params))

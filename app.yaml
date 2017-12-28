@@ -33,6 +33,9 @@ handlers:
 - url: /forgot
   script: main.app
 
+- url: /verification
+  script: main.app
+
 - url: /register
   script: main.app
 

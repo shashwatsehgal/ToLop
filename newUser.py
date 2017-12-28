@@ -46,18 +46,6 @@ class NewUser(BaseHandler):
 			user = user_data[1]
 			user.put()
 			greeting = ('Success! Please continue to Login')
-		
-		# user_id = user.get_id()
-
-    		# token = self.user_model.create_signup_token(user_id)
-
-    		# verification_url = self.uri_for('verification', type='v', user_id=user_id,
-      		#	signup_token=token, _full=True)
-
-    		# msg = 'Send an email to user in order to verify their address. \
-          	#	They will be able to do so by visiting <a href="{url}">{url}</a>'
-
-    		# self.display_message(msg.format(url=verification_url))
 		params = { 'greeting': greeting }
 		template = JINJA_ENVIRONMENT.get_template('www/register.html')
 		self.response.write(template.render(params))

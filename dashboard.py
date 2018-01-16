@@ -24,12 +24,13 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class Dashboard(BaseHandler):
     	@user_required
 	def get(self):
-            	project_query = Project.query()
-            	projects = project_query.fetch(10)
+            	project_query = Project.query(Project.company == self.user.company)
+            	projects = project_query.fetch()
 		watchedSellers_query = WatchedSeller.query()
 		watchedSellers = watchedSellers_query.fetch()
             	template_values = {
                 	'greeting': 'Dashboard',
+			'company': self.user.company,
                 	'url1': ('/create'),
                 	'projects': projects,
 			'watchedSellers': watchedSellers

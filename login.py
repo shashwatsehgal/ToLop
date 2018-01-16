@@ -59,6 +59,7 @@ class UserProfile(BaseHandler):
 	def get(self):
 		params = {
 			'user': self.user,
+			'company': self.user.company,
 			'greeting': ""
 		}
 		template = JINJA_ENVIRONMENT.get_template('www/profile.html')
@@ -82,6 +83,7 @@ class UserProfile(BaseHandler):
 		
 		params = {
                         'user': self.user,
+			'company': self.user.company,
 			'message': greeting	
                 }
                 template = JINJA_ENVIRONMENT.get_template('www/profile.html')

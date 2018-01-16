@@ -41,6 +41,7 @@ class ResultDetail(BaseHandler):
 			'projectKey': projectKey,
 			'page': page,
 			'searchItem': item,
+			'company': self.user.company,
 			'itemKey': itemKey
 		}
 		template = JINJA_ENVIRONMENT.get_template('www/details.html')

@@ -34,7 +34,7 @@
                     
                 </a>
                 <a href="/dashboard" class="simple-text logo-normal">
-                    TOYS "R" US
+                    {{company}}
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -166,7 +166,16 @@
                                                 <div class="col-md-10">
                                                     <div class="form-group label-floating is-empty">
                                                         <label class="control-label"></label>
-                                                        <input type="email" class="form-control" name="author" value="{{author}}" />
+                                                        <input type="text" class="form-control" name="author" value="{{author}}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-sm-2 label-on-left">Company</label>
+                                                <div class="col-md-10">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label"></label>
+                                                        <input type="text" class="form-control" name="company" value="{{company}}" />
                                                     </div>
                                                 </div>
                                             </div>

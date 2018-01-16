@@ -111,7 +111,7 @@ class RunProject(BaseHandler):
 	if existingProject.status == "New":
 	    api = finding(siteid ='EBAY-US', appid='Shashwat-ToLoP-PRD-35d80d3bd-64e84449', config_file=None)
 	    api.execute('findItemsAdvanced', {
-		'keywords': ['toys r us ' + existingProject.projectName],
+		'keywords': [self.user.company + ' ' + existingProject.projectName],
 		'buyerPostalCode': existingProject.zipCode,
 		'itemFilter': [
 		    {'name': 'ListedIn', 'value': 'EBAY-US'},
@@ -152,6 +152,7 @@ class RunProject(BaseHandler):
 		    'url2': ('/dashboard'),
 		    'button1': 'Save Results',
 		    'button2': 'Return to Dashboard',
+		    'company': self.user.company,
 		    'searchResults': searchResults
 		}
 	    else:
@@ -167,6 +168,7 @@ class RunProject(BaseHandler):
 		    'url2': ('/dashboard'),
 		    'button1': 'Save Results',
 		    'button2': 'Return to Dashboard',
+		    'company': self.user.company,
 		    'searchResults': None 
 		}
 	# Else the project has already been created before; We will simply load the results from Datastore
@@ -192,6 +194,7 @@ class RunProject(BaseHandler):
 		'button1': 'Save Results',
 		'button2': 'Return to Dashboard',
 		'searchResults': searchResults,
+		'company': self.user.company,
 		'comments': existingProject.comments
 	    }
 

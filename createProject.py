@@ -41,6 +41,7 @@ class CreateProject(BaseHandler):
                                 'zipCode': existingProject.zipCode,
                                 'website': existingProject.website,
                                 'status': existingProject.status,
+				'company': existingProject.company,
                                 'strKey': strKey
                         }
                 else:
@@ -49,7 +50,8 @@ class CreateProject(BaseHandler):
                         template_values = {
                                 'greeting': greeting,
                                 'author': self.user.name + ' ' + self.user.last_name,
-                                'date': datetime.today().strftime('%m/%d/%Y')
+                                'company': self.user.company,
+				'date': datetime.today().strftime('%m/%d/%Y')
                         }
                 template = JINJA_ENVIRONMENT.get_template('www/create.html')
                 self.response.write(template.render(template_values))
@@ -71,6 +73,7 @@ class CreateProject(BaseHandler):
 			# Saves down all the attributes of the new/existing project
 			newProject.projectName = self.request.get('projectName')
                         newProject.author = self.request.get('author')
+                        newProject.company = self.request.get('company')
                         newProject.date = datetime.strptime(self.request.get('date'),"%m/%d/%Y")
                         if self.request.get('sku')=="":
                                 newProject.sku = 0

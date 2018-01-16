@@ -21,7 +21,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     
 # [START LoginPage]
 class NewUser(BaseHandler):
-  	def get(self):
+	def get(self):
 		params = { 'greeting': 'Enter new user details'}
 		template = JINJA_ENVIRONMENT.get_template('www/register.html')
 		self.response.write(template.render(params))
@@ -32,12 +32,13 @@ class NewUser(BaseHandler):
     		name = self.request.get('name')
     		password = self.request.get('password')
     		last_name = self.request.get('lastname')
+		company = self.request.get('company')
 
     		unique_properties = ['email_address']
     		user_data = self.user_model.create_user(user_name,
       			unique_properties,
       			email_address=email, name=name, password_raw=password,
-      			last_name=last_name, verified=False)
+      			last_name=last_name, company=company, verified=False)
     
     		greeting = ""
 		if not user_data[0]: #user_data is a tuple

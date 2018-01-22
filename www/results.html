@@ -154,7 +154,9 @@
                                             {% if currentPage|int > 1%} 
                                                     <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Previous" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int - 1}}'">
                                             {%endif%}
-                                                <b>{{currentPage}} of {{numPages}}</b>
+                                            {% if numPages|int > 0%} 
+					    	<b>{{currentPage}} of {{numPages}}</b>
+                                            {%endif%}
                                             {% if currentPage|int < numPages|int%} 
                                                 <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Next" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int + 1}}'">
                                             {%endif%}
@@ -179,6 +181,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            	{% if numResults|int > 0%} 
                                                 {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
                                                     <tr>
                                                         <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
@@ -190,14 +193,14 @@
                                                        <!--  <td align="center"> {{"${:,.2f}".format(item.shippingCost)}} </td> -->
                                                         <!-- <td align="center"> {{item.condition}} </td>-->
                                                         <!-- <td align="center"> {{item.postDate.strftime("%b %d, %Y") if item.postDate}} </td> -->
-                                                        <td align="center"> {{item.distance}}</td>
+                                                        <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
                                                         <td align="center"> {{item.searchStatus}} </td>
                                                         <td align="center">
                                                             <form action="/run" method="post">
                                                                 <input name="projectKey" type="text" value="{{projectID}}" hidden/>
                                                                 <input name="page" type="text" value="{{currentPage}}" hidden/>
                                                                 <input name="itemKey" type="text" value="{{item.key}}" hidden/>
-                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe"type="submit">
+                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
                                                                     <i class="material-icons">check</i>
                                                                 </button>
                                                                 <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
@@ -210,6 +213,7 @@
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
+                                                {% endif %}
                                             </tbody>
                                         </table>
 					                    <hr>
@@ -229,6 +233,7 @@
                                             	Comments: 
 					    	<br>
 					    	<textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
+					    	<br>
 					    	<textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
 					    	<br>
 					    	<input type="submit" value="Add Comment"/>

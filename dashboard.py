@@ -25,16 +25,16 @@ class Dashboard(webapp2.RequestHandler):
        		if user:
             		project_query = Project.query()
             		projects = project_query.fetch(10)
+			watchedSellers_query = WatchedSeller.query()
+			watchedSellers = watchedSellers_query.fetch()
             		template_values = {
                 		'greeting': 'Dashboard',
                 		'url1': ('/create'),
 		                'url2': users.create_logout_url('/'),
-                		'button1': 'New Project',
-		                'button2': 'Logout',
-                		'projects': projects
+                		'projects': projects,
+				'watchedSellers': watchedSellers
                 	}
             		template = JINJA_ENVIRONMENT.get_template('www/dashboard.html')
-            		self.response.write(template.render(template_values))
         	else:
             		template_values = {
                 		'greeting': 'You are logged out. Please sign in to proceed',
@@ -42,7 +42,7 @@ class Dashboard(webapp2.RequestHandler):
                 		'button1': 'Login',
                 		'button2': None
                 	}
-            	template = JINJA_ENVIRONMENT.get_template('www/index.html')
+            		template = JINJA_ENVIRONMENT.get_template('www/index.html')
             	self.response.write(template.render(template_values))
 
 	def post(self):

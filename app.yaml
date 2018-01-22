@@ -30,6 +30,21 @@ handlers:
 - url: /details
   script: main.app
 
+- url: /forgot
+  script: main.app
+
+- url: /verification
+  script: main.app
+
+- url: /register
+  script: main.app
+
+- url: /logout
+  script: main.app
+
+- url: /profile
+  script: main.app
+
 # [START libraries]
 libraries:
 - name: webapp2

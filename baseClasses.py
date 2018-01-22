@@ -67,6 +67,7 @@ class Project(ndb.Model):
         projectName = ndb.StringProperty(indexed=False)
         author = ndb.StringProperty(indexed=False)
         date = ndb.DateTimeProperty(auto_now_add=True)
+	company = ndb.StringProperty()
 
         sku = ndb.IntegerProperty()
         dateOfTheft = ndb.DateTimeProperty(auto_now_add=True)

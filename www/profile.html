@@ -91,7 +91,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"> {{ greeting }}</a>
+                        <a class="navbar-brand" href="#"> User Profile </a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -116,100 +116,43 @@
                                 </div>
                                 <div class="card-content">
                                     <div>
-                                        <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">
-                                        <span class="btn-label">
-                                                <i class="material-icons">add</i>
-                                            </span>
-                                        New Project
-                                        </button>
-                                        <h3 class="card-title">Active Projects</h4>
-                                        
+                                        <h3 class="card-title">User Profile  
                                     </div>
                                     <br>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item Name</th>
-                                                    <!-- <th>SKU</th> -->
-                                                    <th>Created by</th>
-                                                    <th>Created on</th>
-                                                    <!-- <th>Status</th> -->
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for project in projects %}
-                                                    <tr>
-                                                        <td> {{project.projectName}} </td>
-                                                        <!-- <td> {{project.sku}} </td> -->
-                                                        <td> {{project.author}} </td>
-                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
-                                                        <!-- <td> {{project.status}} </td> -->
-                                                        <td align="center">
-                                                            <form action="/dashboard" method="post">
-                                                                <input name="key" type="text" value="{{project.key}}" hidden/>
-                                                                <input name="page" type="text" value="1" hidden/>
-                                                                <input class="btn btn-primary btn-xs" style="background-color: #4caf50" name="run" value="Run" type="submit" />
-                                                                <input class="btn btn-primary btn-xs" style="background-color: #ff9800"name="edit" value="Edit" type="submit" />
-                                                                <input class="btn btn-primary btn-xs" style="background-color: #f54437"name="delete" value="Delete" type="submit" />                                                                
-                                                                <!-- <input name="edit" value="Edit" type="submit"/> -->
-                                                                <!-- <input name="delete" value="Delete" type="submit"/> -->
-                                                                <!-- <input name="run" value="Run" type="submit"/> -->
-                                                            </form>
-                                                      </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                    <strong> Username: </strong> {{user.auth_ids[0]}} 
+                                    <br>
+                                    <br>
+                                    <strong> Email: </strong> {{user.email_address}}
+                                    <br>
+                                    <br>
+                                    <br>
+				    <strong> Name: </strong> {{user.name}} {{user.last_name}}
+                                    <br>
+                                    <br>
+                                    --------------------------------------------------------------------------------
+                                    <br>
+                                    <br>
+				    <strong> Update Password: <font color='red'> {{message}} </font> </strong>
+				    <br>
+				    <br>
+				    <form action="/profile" method="post">
+				        <label>Enter new password</label>
+					<input type="password" name="password" />
+                                        <br>
+                                        <br>
+				        <label>Re-enter password</label>
+					<input type="password" name="confirm_password" />
+					<input type="hidden" name="t" value="{{ token }}" />
+                                        <br>
+                                        <br>
+					<input type="submit"class="btn btn-success" value="Update password" />
+				    </form>
+				<button class="btn btn-danger" onclick="window.location.href='/dashboard'">Return To Dashboard</button>
+				</div>
                             </div>
                         </div>
                     </div>                    
-            </div>
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-icon" data-background-color="rose">
-                                    <i class="material-icons">assignment</i>
-                                </div>
-                                <div class="card-content">
-                                    <h3 class="card-title">Watched Sellers</h4>
-                                    <br>
-				    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>User Name</th>
-                                                    <th>Rating (out of 100)</th>
-                                                    <th>Number of Posts</th>
-                                                    <th>Times Flagged</th>
-                                                    <th>Suspicious Item</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for Seller in watchedSellers %}
-                                                    <tr>
-                                                        <td> <a href="{{Seller.url}}"> {{Seller.userName}} </td>
-                                                        <td align="center"> {{Seller.sellerRating}} </td>
-                                                        <td align="center"> {{Seller.numberOfPosts}} </td>
-                                                        <td align="center"> {{Seller.timesFlagged}} </td>
-                                                        <td> <a href="{{Seller.watchedResultURL}}"> {{Seller.watchedResultTitle}} </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                    
-            </div>
- 
+                </div>
 	    <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">

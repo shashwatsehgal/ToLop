@@ -41,36 +41,38 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="active">
-                        <a href="./dashboard.html">
+                        <a href="./dashboard">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a data-toggle="collapse" href="#pagesExamples">
+                        <a>
                             <i class="material-icons">content_paste</i>
-                            <p>Projects
-                                <b class="caret"></b>
-                            </p>
+                            <p>Projects</p>
                         </a>
-                        <div class="collapse" id="pagesExamples">
+                        <!-- <div class="collapse"> -->
                             <ul class="nav">
                                 {% for project in projects %}
                                 <li>
-                                    <a href="./pages/pricing.html">
-                                        <span class="sidebar-mini"></span>
-                                        <span class="sidebar-normal"> {{project.projectName}} </span>
+                                    <a style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px">
+                                        <form action="/dashboard" method="post">
+                                            <input name="key" type="text" value="{{project.key}}" hidden/>
+                                            <input name="page" type="text" value="1" hidden/>
+                                            <span class="sidebar-normal">
+                                                <input class="btn" style="background-color: rgba(0, 0, 0, 0); box-shadow: none;" name="run" value="{{project.projectName}}" type="submit" />
+                                            </span>
+                                        </form>
                                     </a>
                                 </li>
                                 {% endfor %}
                                 <li>
-                                    <a href= {{url1}}>
-                                        <span class="sidebar-mini"></span>
-                                        <span class="sidebar-normal">Add new project</span>
+                                    <a style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px" href= {{url1}}>
+                                        <span class="sidebar-normal">(+) Add new project</span>
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        <!-- </div> -->
                     </li>
                 </ul>
             </div>
@@ -133,7 +135,9 @@
                                                     <th>Item Name</th>
                                                     <!-- <th>SKU</th> -->
                                                     <th>Created by</th>
-                                                    <th>Created on</th>
+                                                    <th>Last run</th>
+                                                    <th>Last access</th>
+                                                    <th>Created</th>
                                                     <!-- <th>Status</th> -->
                                                     <th></th>
                                                 </tr>
@@ -144,6 +148,8 @@
                                                         <td> {{project.projectName}} </td>
                                                         <!-- <td> {{project.sku}} </td> -->
                                                         <td> {{project.author}} </td>
+                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
+                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
                                                         <td> {{project.date.strftime("%b %d, %Y")}} </td>
                                                         <!-- <td> {{project.status}} </td> -->
                                                         <td align="center">

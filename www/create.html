@@ -38,74 +38,38 @@
                 </a>
             </div>
             <div class="sidebar-wrapper">
-                <!-- <div class="user">
-                    <div class="photo">
-                        <img src="../assets/img/faces/avatar.jpg" />
-                    </div>
-                    <div class="info">
-                        <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                            <span>
-                                Tania Andrew
-                                <b class="caret"></b>
-                            </span>
-                        </a>
-                        <div class="clearfix"></div>
-                        <div class="collapse" id="collapseExample">
-                            <ul class="nav">
-                                <li>
-                                    <a href="#">
-                                        <span class="sidebar-mini">MP</span>
-                                        <span class="sidebar-normal">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="sidebar-mini">EP</span>
-                                        <span class="sidebar-normal">Edit Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="sidebar-mini">S</span>
-                                        <span class="sidebar-normal">Settings</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
                 <ul class="nav">
-                    <!-- <li class="active">
-                        <a href="./dashboard.html">
+                    <li class="active">
+                        <a href="./dashboard">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
-                    </li> -->
+                    </li>
                     <li>
-                        <a data-toggle="collapse" href="#pagesExamples">
+                        <a>
                             <i class="material-icons">content_paste</i>
-                            <p>Projects
-                                <b class="caret"></b>
-                            </p>
+                            <p>Projects</p>
                         </a>
-                        <div class="collapse" id="pagesExamples">
+                        <!-- <div class="collapse"> -->
                             <ul class="nav">
-                                {% for project in projects %}
                                 <li>
-                                    <a href="./pages/pricing.html">
-                                        <span class="sidebar-mini"></span>
-                                        <span class="sidebar-normal"> {{project.projectName}} </span>
+                                    {% for project in projects %}
+                                    <a style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px">
+                                        <form>
+                                            <input name="key" type="text" value="{{project.key}}" hidden/>
+                                            <input name="page" type="text" value="1" hidden/>
+                                            <span class="sidebar-normal">
+                                                <input class="btn" style="background-color: rgba(0, 0, 0, 0); box-shadow: none;" name="run" value="{{project.projectName}}" type="submit" />
+                                            </span>
+                                        </form>
                                     </a>
-                                </li>
-                                {% endfor %}
-                                <li>
-                                    <a href= {{url1}}>
-                                        <span class="sidebar-mini"></span>
+                                    {% endfor %}
+                                    <a style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px" href= {{url1}}>
                                         <span class="sidebar-normal">Add new project</span>
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        <!-- </div> -->
                     </li>
                 </ul>
             </div>

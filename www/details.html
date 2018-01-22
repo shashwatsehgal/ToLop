@@ -164,9 +164,10 @@
                                             Safe
                                         </button>
                                         <button class="btn btn-primary btn-xs" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
-                                            Suspicious
+                                            *Suspicious
                                         </button>
                                         <br>
+                                        <p style="font-style: italic; font-size: 12px"> *Marking item as "suspicious" adds seller to watchlist </p>
                                         <button class="btn btn-label btn-round btn-sm" name="results" type="submit" value="Back to Results">Back to results</button>
 					</form>
 				    </div>
@@ -233,7 +234,7 @@
                                                     <div class="table-responsive">
                                                       ZipCode:<b> {{searchItem.zipCode}}</b>
                                                       <br>
-                                                      Distance: <b>{{searchItem.distance}} miles</b>
+                                                      Distance from Zip: <b>{{searchItem.distance}} miles</b>
                                                       <br>
                                                       Location: <b>{{searchItem.location}}</b>
                                                       <br>
@@ -252,6 +253,40 @@
                                                       <br>
                                                       Seller Rating: <b>{{searchItem.sellerRating}}</b>
                                                       <br>
+                                                      <br>
+                                                      <h4 class="card-title">All seller listings from {{searchItem.platform}}</h4>
+                                                      <div class="table-responsive">
+                                                         <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                  <th> Image </th>
+                                                                  <th> Item </th>
+                                                                  <th> Location </th>
+                                                                  
+                                                                  <!-- <th> Zip </th> -->
+                                                                  <th> Price </th>
+                                                                  <!-- <th> Shipping Cost </th> -->
+                                                                  <!-- <th> Condition </th>-->
+                                                                  <!-- <th> Post Date </th> -->
+                                                                  <th> Distance </th>
+                                                                  <th> Status </th>
+                                                                  <th></th>                                                  
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>                                                            
+                                                                <tr>
+                                                                    <td> xx </td>
+                                                                    <td> xx </td>
+                                                                    <td> xx </td>
+                                                                   
+                                                                    <td align="center"> xx </td>
+                                                                    <td align="center"> xx </td>
+                                                                    <td align="center"> xx </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <hr>                                                        
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>

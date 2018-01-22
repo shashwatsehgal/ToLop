@@ -172,13 +172,14 @@
                                                   <th> Image </th>
                                                   <th> Item </th>
                                                   <th> Location </th>
-                                                  <th> User rating </th>
+                                                  <th> Seller </th>
+                                                  <th> Seller rating </th>
                                                   <!-- <th> Zip </th> -->
                                                   <th> Price </th>
                                                   <!-- <th> Shipping Cost </th> -->
                                                   <!-- <th> Condition </th>-->
                                                   <!-- <th> Post Date </th> -->
-                                                  <th> Score </th>
+                                                  <th> Distance </th>
                                                   <th> Status </th>
                                                   <th></th>                                                  
                                                 </tr>
@@ -190,6 +191,7 @@
                                                         <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
                                                         <td> <a href="{{item.website}}" target="_blank"> {{item.title[0:30]}}... </a> </td>
                                                         <td > {{item.location[0:10]}}... </td>
+                                                        <td> {{item.seller}} </td>
                                                         <td> {{item.sellerRating}} </td>
                                                         <!-- <td align="center"> {{item.zipCode}} </td> -->
                                                         <td align="center"> {{"${:,.2f}".format(item.price)}} </td>
@@ -228,19 +230,19 @@
                                             {% endif %}
 					                    </form>
 
-					    <form action="/run" method="post">
-					    	<input name="projectKey" type="text" value="{{projectID}}" hidden/>
-						<input name="page" type="text" value="{{currentPage}}" hidden/>
-					   	<br>
-					    	<br>
-                                            	Comments: 
-					    	<br>
-					    	<textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
-					    	<br>
-					    	<textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
-					    	<br>
-					    	<input type="submit" value="Add Comment"/>
-					    </form>
+                					    <form action="/run" method="post">
+                					    	<input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                						<input name="page" type="text" value="{{currentPage}}" hidden/>
+                					   	<br>
+                					    	<br>
+                                                            	Comments: 
+                					    	<br>
+                					    	<textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
+                					    	<br>
+                					    	<textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
+                					    	<br>
+                					    	<input type="submit" value="Add Comment"/>
+                					    </form>
                                     </div>
                                 </div>
                             </div>

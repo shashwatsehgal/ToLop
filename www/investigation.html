@@ -154,11 +154,10 @@
                                                     <th>Watched Items</th> <!-- Number of watched items in the investigation -->
                                                     <th>Watched Sellers</th> <!-- Number of watched sellers involved in the investigation -->
                                                     <th>Location</th>
-                                                    <th></th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for project in projects %}
                                                     <tr>
                                                         <td> owner placeholder </td>
                                                         <td> status placeholder </td>
@@ -166,7 +165,7 @@
                                                         <td> watched sellers placeholder </td>
                                                         <td> locaton placeholder </td>
                                                         <!-- <td> {{project.status}} </td> -->
-                                                        <td align="center">
+                                                        <td align="left">
                                                             <form action="/dashboard" method="post">
                                                                 <input name="key" type="text" value="{{project.key}}" hidden/>
                                                                 <input name="page" type="text" value="1" hidden/>
@@ -179,7 +178,6 @@
                                                             </form>
                                                       </td>
                                                     </tr>
-                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -200,19 +198,20 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                  <th> Image </th>
-                                                  <th> Item </th>
-                                                  <th> Location </th>
-                                                  <th> Defence score </th>
-                                                  <th> Seller </th>
-                                                  <th> Seller rating </th>
-                                                  <!-- <th> Zip </th> -->
-                                                  <th> Price </th>
-                                                  <!-- <th> Shipping Cost </th> -->
-                                                  <!-- <th> Condition </th>-->
-                                                  <!-- <th> Post Date </th> -->
-                                                  <th> Distance </th>
-                                                  <th></th>                                                  
+                                                    <th> Image </th>
+                                                    <th> Item </th>
+                                                    <th> Location </th>
+                                                    <th> Defence score </th>
+                                                    <th> Seller </th>
+                                                    <th> Seller rating </th>
+                                                    <!-- <th> Zip </th> -->
+                                                    <th> Price </th>
+                                                    <!-- <th> Shipping Cost </th> -->
+                                                    <!-- <th> Condition </th>-->
+                                                    <!-- <th> Post Date </th> -->
+                                                    <th> Distance </th>
+                                                    <th> Status </th>
+                                                    <th> Actions </th>                                                  
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -269,8 +268,9 @@
                                             <th>User name</th>
                                             <th>Defence score</th>
                                             <th>User rating</th>
-                                            <th>Number of flagged items</th>
+                                            <th># flagged items</th>
                                             <th>Location</th>
+                                            <th>Actions</th>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -279,6 +279,22 @@
                                                 <td>12</td>
                                                 <td>14</td>
                                                 <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to profile</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>User name</td>
@@ -286,6 +302,22 @@
                                                 <td>12</td>
                                                 <td>14</td>
                                                 <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to profile</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>User name</td>
@@ -293,6 +325,22 @@
                                                 <td>12</td>
                                                 <td>14</td>
                                                 <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to profile</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>User name</td>
@@ -300,6 +348,22 @@
                                                 <td>12</td>
                                                 <td>14</td>
                                                 <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to profile</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -321,6 +385,7 @@
                                             <th>Seller rating</th>
                                             <th>Price</th>
                                             <th>Location</th>
+                                            <th>Actions</th>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -330,30 +395,165 @@
                                                 <td>12</td>
                                                 <td>$20</td>
                                                 <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to listing</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
+                                                <td>Image</td>
+                                                <td>name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>$20</td>
+                                                <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to listing</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
+                                                <td>Image</td>
+                                                <td>name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>$20</td>
+                                                <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to listing</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
+                                                <td>Image</td>
+                                                <td>name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>$20</td>
+                                                <td>City, State</td>
+                                                <td>
+                                                    <div class="dropdown pull-left">
+                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="material-icons">build</i>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            <li>
+                                                                <a href="#action">Mark safe</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#action">Go to listing</a>
+                                                            </li>                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-icon" data-background-color="rose">
+                                    <i class="material-icons">assignment</i>
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">
+                                        <span class="btn-label">
+                                                <i class="material-icons">add</i>
+                                            </span>
+                                        New Project
+                                        </button>
+                                        <h3 class="card-title">Active projects for this investigation</h4>
+                                        
+                                    </div>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item Name</th>
+                                                    <!-- <th>SKU</th> -->
+                                                    <!-- <th>Created by</th> -->
+                                                    <th>Last run</th>
+                                                    <th>Last access</th>
+                                                    <th>Create date</th>
+                                                    <th>Investigation</th> <!-- Should state either the name of the investigation or N/A -->
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for project in projects %}
+                                                    <tr>
+                                                        <td> {{project.projectName}} </td>
+                                                        <!-- <td> {{project.sku}} </td> -->
+                                                        <!-- <td> {{project.author}} </td> -->
+                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
+                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
+                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
+                                                        <td> Investigation place holder </td>
+                                                        <td align="right">
+                                                            <form action="/dashboard" method="post">
+                                                                <input name="key" type="text" value="{{project.key}}" hidden/>
+                                                                <input name="page" type="text" value="1" hidden/>
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #4caf50" name="run" value="Run" type="submit" />
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #ff9800"name="edit" value="Edit" type="submit" />
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #f54437"name="delete" value="Delete" type="submit" />                                                                
+                                                                <!-- <input name="edit" value="Edit" type="submit"/> -->
+                                                                <!-- <input name="delete" value="Delete" type="submit"/> -->
+                                                                <!-- <input name="run" value="Run" type="submit"/> -->
+                                                            </form>
+                                                      </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <h3>Comments</h3>
                             <form action="/run" method="post">
@@ -433,14 +633,11 @@
                                       <th> Location </th>
                                       <th> Defence score </th>
                                       <th> Seller </th>
-                                      <th> Seller rating </th>
-                                      <!-- <th> Zip </th> -->
-                                      <th> Price </th>
-                                      <!-- <th> Shipping Cost </th> -->
-                                      <!-- <th> Condition </th>-->
-                                      <!-- <th> Post Date </th> -->
+                                      <th> Seller rating </th>                                      
+                                      <th> Price </th>                                      
                                       <th> Distance </th>
-                                      <th></th>                                                  
+                                      <th> Status </th>
+                                      <th> Actions </th>                                                
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -453,11 +650,7 @@
                                             <td> Place holder</td>
                                             <td> {{item.seller}} </td>
                                             <td> {{item.sellerRating}} </td>
-                                            <!-- <td align="center"> {{item.zipCode}} </td> -->
                                             <td align="center"> {{"${:,.2f}".format(item.price)}} </td>
-                                           <!--  <td align="center"> {{"${:,.2f}".format(item.shippingCost)}} </td> -->
-                                            <!-- <td align="center"> {{item.condition}} </td>-->
-                                            <!-- <td align="center"> {{item.postDate.strftime("%b %d, %Y") if item.postDate}} </td> -->
                                             <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
                                             <td align="center"> {{item.searchStatus}} </td>
                                             <td align="center">
@@ -481,6 +674,63 @@
                                     {% endif %}
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-text" data-background-color="green">                                    
+                        <h4 class="card-title">Sellers marked safe</h4>
+                    </div>
+                    <div class="card-content">                        
+                        <br>
+                        <div class="table-responsive">
+                            <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Seller name</th>
+                                                    <th>Defence score</th> <!-- Likelihood of being a malicious seller -->
+                                                    <th>Seller rating</th>
+                                                    <th>Number of Posts</th>
+                                                    <th>Times Flagged</th>
+                                                    <th>Suspicious Item</th>
+                                                    <th>Investigation</th> <!-- Should state either the name of the investigation or N/A -->
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for Seller in watchedSellers %}
+                                                    <tr>
+                                                        <td> <a href="{{Seller.url}}"> {{Seller.userName}} </td>
+                                                        <td align="center"> {{Seller.sellerRating}} </td>
+                                                        <td align="center"> {{Seller.sellerRating}} </td>
+                                                        <td align="center"> {{Seller.numberOfPosts}} </td>
+                                                        <td align="center"> {{Seller.timesFlagged}} </td>
+                                                        <td> <a href="{{Seller.watchedResultURL}}"> {{Seller.watchedResultTitle}} </td>
+                                                        <td> Investigation place holder </td>
+                                                        <td align="left">
+                                                        <form action="/run" method="post">
+                                                            <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                                                            <input name="page" type="text" value="{{currentPage}}" hidden/>
+                                                            <input name="itemKey" type="text" value="{{item.key}}" hidden/>
+                                                            <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
+                                                                <i class="material-icons">check</i>
+                                                            </button>
+                                                            <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
+                                                                <i class="material-icons">warning</i>
+                                                            </button>
+                                                            <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
+                                                                <i class="material-icons">more_horiz</i>
+                                                            </button>
+                                                        </form>
+                                            </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
                         </div>
                     </div>
                 </div>

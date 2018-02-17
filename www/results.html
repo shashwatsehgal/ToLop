@@ -158,7 +158,7 @@
                                                     <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Previous" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int - 1}}'">
                                             {%endif%}
                                             {% if numPages|int > 0%} 
-					    	<b>{{currentPage}} of {{numPages}}</b>
+					    	                  <b>{{currentPage}} of {{numPages}}</b>
                                             {%endif%}
                                             {% if currentPage|int < numPages|int%} 
                                                 <input class="btn btn-label btn-round btn-sm" name="page" type="button" value="Next" onclick="window.location.href='/run?id={{projectID|urlencode}}&page={{currentPage|int + 1}}'">
@@ -166,7 +166,7 @@
                                         </form>
 
                                     <div class="table-responsive">
-                                         <table class="table table-striped">
+                                        <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                   <th> Image </th>
@@ -222,31 +222,77 @@
                                             </tbody>
                                         </table>
 					                    <hr>
-                                        <form>
-                                           
+                                        <form>                                           
                                             <input class="btn btn-success" type="button" value="{{ button1 }}" onclick="window.location.href='{{url1}}'"/>
                                             {% if button2 != None %}
                                             <input class="btn btn-danger" type="button" value="{{ button2 }}" onclick="window.location.href='{{url2}}'"/>
                                             {% endif %}
-					                    </form>
-
-                					    <form action="/run" method="post">
-                					    	<input name="projectKey" type="text" value="{{projectID}}" hidden/>
-                						<input name="page" type="text" value="{{currentPage}}" hidden/>
-                					   	<br>
-                					    	<br>
-                                            Comments: 
-                					    	<br>
-                					    	<textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
-                					    	<br>
-                					    	<textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
-                					    	<br>
-                					    	<input type="submit" value="Add Comment"/>
-                					    </form>
+					                    </form>                					    
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-text" data-background-color="green">                                    
+                        <h4 class="card-title">Items marked safe</h4>
+                    </div>
+                    <div class="card-content">                        
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                      <th> Image </th>
+                                      <th> Item </th>
+                                      <th> Location </th>
+                                      <th> Defence score </th>
+                                      <th> Seller </th>
+                                      <th> Seller rating </th>                                      
+                                      <th> Price </th>                                      
+                                      <th> Distance </th>
+                                      <th> Status </th>
+                                      <th> Actions </th>                                                
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if numResults|int > 0%} 
+                                    {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
+                                        <tr>
+                                            <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
+                                            <td> <a href="{{item.website}}" target="_blank"> {{item.title[0:30]}}... </a> </td>
+                                            <td> {{item.location[0:10]}}... </td>
+                                            <td> Place holder</td>
+                                            <td> {{item.seller}} </td>
+                                            <td> {{item.sellerRating}} </td>
+                                            <td align="center"> {{"${:,.2f}".format(item.price)}} </td>
+                                            <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
+                                            <td align="center"> {{item.searchStatus}} </td>
+                                            <td align="center">
+                                                <form action="/run" method="post">
+                                                    <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                                                    <input name="page" type="text" value="{{currentPage}}" hidden/>
+                                                    <input name="itemKey" type="text" value="{{item.key}}" hidden/>
+                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
+                                                        <i class="material-icons">check</i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
+                                                        <i class="material-icons">warning</i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
+                                                        <i class="material-icons">more_horiz</i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     </div>                    
             </div>
             <footer class="footer">

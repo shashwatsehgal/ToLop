@@ -162,7 +162,7 @@
                                                     <th>Watched Items</th> <!-- Number of watched items in the investigation -->
                                                     <th>Watched Sellers</th> <!-- Number of watched sellers involved in the investigation -->
                                                     <th>Location</th>
-                                                    <th></th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -176,7 +176,7 @@
                                                         <td> watched sellers placeholder </td>
                                                         <td> locaton placeholder </td>
                                                         <!-- <td> {{project.status}} </td> -->
-                                                        <td align="right">
+                                                        <td align="left">
                                                             <form action="/dashboard" method="post">
                                                                 <input name="key" type="text" value="{{project.key}}" hidden/>
                                                                 <input name="page" type="text" value="1" hidden/>
@@ -216,7 +216,7 @@
                                             </span>
                                         New Project
                                         </button>
-                                        <h3 class="card-title">Active Projects</h4>
+                                        <h3 class="card-title">Active Projects</h3>
                                         
                                     </div>
                                     <br>
@@ -231,7 +231,7 @@
                                                     <th>Last access</th>
                                                     <th>Create date</th>
                                                     <th>Investigation</th> <!-- Should state either the name of the investigation or N/A -->
-                                                    <th></th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -244,7 +244,7 @@
                                                         <td> {{project.date.strftime("%b %d, %Y")}} </td>
                                                         <td> {{project.date.strftime("%b %d, %Y")}} </td>
                                                         <td> Investigation place holder </td>
-                                                        <td align="right">
+                                                        <td align="left">
                                                             <form action="/dashboard" method="post">
                                                                 <input name="key" type="text" value="{{project.key}}" hidden/>
                                                                 <input name="page" type="text" value="1" hidden/>
@@ -279,7 +279,7 @@
                                 <div class="card-content">
                                     <h3 class="card-title">Watched Sellers</h4>
                                     <br>
-				    <div class="table-responsive">
+				                    <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>

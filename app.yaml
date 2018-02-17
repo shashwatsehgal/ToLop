@@ -45,6 +45,12 @@ handlers:
 - url: /profile
   script: main.app
 
+- url: /create_investigation
+  script: main.app
+
+- url: /investigation
+  script: main.app
+
 # [START libraries]
 libraries:
 - name: webapp2

@@ -1,0 +1,520 @@
+<!doctype html>
+{% autoescape true %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>DEFENCE</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!--  Material Dashboard CSS    -->
+    <link href="assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-active-color="rose" data-background-color="black" data-image="../assets/img/sidebar-1.jpg">
+            <!--
+        Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
+        Tip 2: you can also add an image using data-image tag
+        Tip 3: you can change the color of the sidebar with data-background-color="white | black"
+    -->
+            <div class="logo">
+                <a href="/dashboard" class="simple-text logo-mini">
+                    
+                </a>
+                <a href="/dashboard" class="simple-text logo-normal">
+                    {{company}}
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="./dashboard">
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="material-icons">content_paste</i>
+                            <p>Investigations</p>
+                        </a>
+                        <!-- <div class="collapse"> -->
+                            <ul class="nav">
+                                {% for project in projects %}
+                                <li>
+                                    <a style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px">
+                                        <form action="/dashboard" method="post">
+                                            <input name="key" type="text" value="{{project.key}}" hidden/>
+                                            <input name="page" type="text" value="1" hidden/>
+                                            <span class="sidebar-normal">
+                                                <input class="btn" style="background-color: rgba(0, 0, 0, 0); box-shadow: none;" name="run" value="{{project.projectName}}" type="submit" />
+                                            </span>
+                                        </form>
+                                    </a>
+                                </li>
+                                {% endfor %}                                
+                            </ul>
+                        <!-- </div> -->
+                    </li>
+                    <li>
+                        <a>
+                            <i class="material-icons">content_paste</i>
+                            <p>Projects</p>
+                        </a>
+                        <!-- <div class="collapse"> -->
+                            <ul class="nav">
+                                {% for project in projects %}
+                                <li>
+                                    <a style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px">
+                                        <form action="/dashboard" method="post">
+                                            <input name="key" type="text" value="{{project.key}}" hidden/>
+                                            <input name="page" type="text" value="1" hidden/>
+                                            <span class="sidebar-normal">
+                                                <input class="btn" style="background-color: rgba(0, 0, 0, 0); box-shadow: none;" name="run" value="{{project.projectName}}" type="submit" />
+                                            </span>
+                                        </form>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                                <!-- <li>
+                                    <a style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px" href= {{url1}}>
+                                        <span class="sidebar-normal">(+) Add new project</span>
+                                    </a>
+                                </li> -->
+                            </ul>
+                        <!-- </div> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-minimize">
+                        <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                            <i class="material-icons visible-on-sidebar-regular">more_vert</i>
+                            <i class="material-icons visible-on-sidebar-mini">view_list</i>
+                        </button>
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"> {{ greeting }}</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button class="btn btn-primary btn-simple" onclick="window.location.href='/profile'">Profile</button>
+                            </li>
+                            <li>
+                                <button class="btn btn-primary btn-simple" onclick="window.location.href='/logout'">Logout</button>
+                            </li>
+                            
+                        </ul>                        
+                    </div>
+                </div>
+            </nav>
+            <!-- Start Investigation model -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-text" data-background-color="rose">                                    
+                                    <h2 class="card-title">Placeholder for Investigation name</h2>
+                                </div>
+                                <div class="card-content">
+                                    <div>                                       
+                                        <!-- <h2 class="card-title">Placeholder for Investigation name</h2> -->
+                                    </div>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Created by</th> <!-- User name of the creator -->
+                                                    <th>Status</th> <!-- Will show Not started, In progress, Account prosecuted, Unsubstantiated, Inactive, Account Closed -->
+                                                    <th>Watched Items</th> <!-- Number of watched items in the investigation -->
+                                                    <th>Watched Sellers</th> <!-- Number of watched sellers involved in the investigation -->
+                                                    <th>Location</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for project in projects %}
+                                                    <tr>
+                                                        <td> owner placeholder </td>
+                                                        <td> status placeholder </td>
+                                                        <td> watched items placeholder </td>
+                                                        <td> watched sellers placeholder </td>
+                                                        <td> locaton placeholder </td>
+                                                        <!-- <td> {{project.status}} </td> -->
+                                                        <td align="center">
+                                                            <form action="/dashboard" method="post">
+                                                                <input name="key" type="text" value="{{project.key}}" hidden/>
+                                                                <input name="page" type="text" value="1" hidden/>
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #ff9800"name="edit" value="Export" type="submit" />
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #ff9800"name="edit" value="Edit" type="submit" />
+                                                                <input class="btn btn-primary btn-xs" style="background-color: #f54437"name="delete" value="Delete investigation" type="submit" />                                                                
+                                                                <!-- <input name="edit" value="Edit" type="submit"/> -->
+                                                                <!-- <input name="delete" value="Delete" type="submit"/> -->
+                                                                <!-- <input name="run" value="Run" type="submit"/> -->
+                                                            </form>
+                                                      </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-text" data-background-color="rose">                                    
+                                    <h4 class="card-title">Items for review</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div>                                       
+                                        <!-- <h2 class="card-title">Placeholder for Investigation name</h2> -->
+                                    </div>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                  <th> Image </th>
+                                                  <th> Item </th>
+                                                  <th> Location </th>
+                                                  <th> Defence score </th>
+                                                  <th> Seller </th>
+                                                  <th> Seller rating </th>
+                                                  <!-- <th> Zip </th> -->
+                                                  <th> Price </th>
+                                                  <!-- <th> Shipping Cost </th> -->
+                                                  <!-- <th> Condition </th>-->
+                                                  <!-- <th> Post Date </th> -->
+                                                  <th> Distance </th>
+                                                  <th></th>                                                  
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if numResults|int > 0%} 
+                                                {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
+                                                    <tr>
+                                                        <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
+                                                        <td> <a href="{{item.website}}" target="_blank"> {{item.title[0:30]}}... </a> </td>
+                                                        <td> {{item.location[0:10]}}... </td>
+                                                        <td> Place holder</td>
+                                                        <td> {{item.seller}} </td>
+                                                        <td> {{item.sellerRating}} </td>
+                                                        <!-- <td align="center"> {{item.zipCode}} </td> -->
+                                                        <td align="center"> {{"${:,.2f}".format(item.price)}} </td>
+                                                       <!--  <td align="center"> {{"${:,.2f}".format(item.shippingCost)}} </td> -->
+                                                        <!-- <td align="center"> {{item.condition}} </td>-->
+                                                        <!-- <td align="center"> {{item.postDate.strftime("%b %d, %Y") if item.postDate}} </td> -->
+                                                        <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
+                                                        <td align="center"> {{item.searchStatus}} </td>
+                                                        <td align="center">
+                                                            <form action="/run" method="post">
+                                                                <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                                                                <input name="page" type="text" value="{{currentPage}}" hidden/>
+                                                                <input name="itemKey" type="text" value="{{item.key}}" hidden/>
+                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
+                                                                    <i class="material-icons">check</i>
+                                                                </button>
+                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
+                                                                    <i class="material-icons">warning</i>
+                                                                </button>
+                                                                <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
+                                                                    <i class="material-icons">more_horiz</i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-text" data-background-color="rose">
+                                    <h4 class="card-title">Watched sellers</h4>
+                                    <p class="category">Sellers with suspicious items</p>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>User name</th>
+                                            <th>Defence score</th>
+                                            <th>User rating</th>
+                                            <th>Number of flagged items</th>
+                                            <th>Location</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>User name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>City, State</td>
+                                            </tr>
+                                            <tr>
+                                                <td>User name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>City, State</td>
+                                            </tr>
+                                            <tr>
+                                                <td>User name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>City, State</td>
+                                            </tr>
+                                            <tr>
+                                                <td>User name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>City, State</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-text" data-background-color="rose">
+                                    <h4 class="card-title">Watched items</h4>
+                                    <p class="category">Suspicious items part of this investigation</p>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>Item image</th>
+                                            <th>Item name</th>
+                                            <th>Defence score</th>
+                                            <th>Seller rating</th>
+                                            <th>Price</th>
+                                            <th>Location</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Image</td>
+                                                <td>name</td>
+                                                <td>88</td>
+                                                <td>12</td>
+                                                <td>$20</td>
+                                                <td>City, State</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Minerva Hooper</td>
+                                                <td>$23,789</td>
+                                                <td>Curaçao</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Sage Rodriguez</td>
+                                                <td>$56,142</td>
+                                                <td>Netherlands</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Philip Chaney</td>
+                                                <td>$38,735</td>
+                                                <td>Korea, South</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Comments</h3>
+                            <form action="/run" method="post">
+                                <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                            <input name="page" type="text" value="{{currentPage}}" hidden/>
+                                <br>
+                                Comments: 
+                                <br>
+                                <textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
+                                <br>
+                                <textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
+                                <br>
+                                <input type="submit" value="Add Comment"/>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Project timeline</h3>
+                            <ul class="timeline timeline-simple">
+                                <li class="timeline-inverted">
+                                    <div class="timeline-badge danger">
+                                        <i class="material-icons">face</i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <span class="label label-danger">Seller added</span>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>Name of seller and a link to the profile</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="timeline-inverted">
+                                    <div class="timeline-badge danger">
+                                        <i class="material-icons">face</i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <span class="label label-danger">Seller added</span>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>Name of seller and a link to the profile</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="timeline-inverted">
+                                    <div class="timeline-badge info">
+                                        <i class="material-icons">fingerprint</i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <span class="label label-info">Investigation started</span>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>Name of investigation, investigation owner</p>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>                 
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-text" data-background-color="green">                                    
+                        <h4 class="card-title">Items marked safe</h4>
+                    </div>
+                    <div class="card-content">                        
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                      <th> Image </th>
+                                      <th> Item </th>
+                                      <th> Location </th>
+                                      <th> Defence score </th>
+                                      <th> Seller </th>
+                                      <th> Seller rating </th>
+                                      <!-- <th> Zip </th> -->
+                                      <th> Price </th>
+                                      <!-- <th> Shipping Cost </th> -->
+                                      <!-- <th> Condition </th>-->
+                                      <!-- <th> Post Date </th> -->
+                                      <th> Distance </th>
+                                      <th></th>                                                  
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if numResults|int > 0%} 
+                                    {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
+                                        <tr>
+                                            <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
+                                            <td> <a href="{{item.website}}" target="_blank"> {{item.title[0:30]}}... </a> </td>
+                                            <td> {{item.location[0:10]}}... </td>
+                                            <td> Place holder</td>
+                                            <td> {{item.seller}} </td>
+                                            <td> {{item.sellerRating}} </td>
+                                            <!-- <td align="center"> {{item.zipCode}} </td> -->
+                                            <td align="center"> {{"${:,.2f}".format(item.price)}} </td>
+                                           <!--  <td align="center"> {{"${:,.2f}".format(item.shippingCost)}} </td> -->
+                                            <!-- <td align="center"> {{item.condition}} </td>-->
+                                            <!-- <td align="center"> {{item.postDate.strftime("%b %d, %Y") if item.postDate}} </td> -->
+                                            <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
+                                            <td align="center"> {{item.searchStatus}} </td>
+                                            <td align="center">
+                                                <form action="/run" method="post">
+                                                    <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                                                    <input name="page" type="text" value="{{currentPage}}" hidden/>
+                                                    <input name="itemKey" type="text" value="{{item.key}}" hidden/>
+                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
+                                                        <i class="material-icons">check</i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
+                                                        <i class="material-icons">warning</i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
+                                                        <i class="material-icons">more_horiz</i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+ 
+        <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Terms of Service
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Privacy
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        DEFENCE
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
+{% endautoescape %}

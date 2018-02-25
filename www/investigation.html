@@ -152,7 +152,7 @@
                                                     <th>Created by</th> <!-- User name of the creator -->
                                                     <th>Status</th> <!-- Will show Not started, In progress, Account prosecuted, Unsubstantiated, Inactive, Account Closed -->
                                                     <th>Watched Items</th> <!-- Number of watched items in the investigation -->
-                                                    <th>Watched Sellers</th> <!-- Number of watched sellers involved in the investigation -->
+                                                    <th>Watched Seller</th> <!-- Number of watched sellers involved in the investigation -->
                                                     <th>Location</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -162,7 +162,7 @@
                                                         <td> owner placeholder </td>
                                                         <td> status placeholder </td>
                                                         <td> watched items placeholder </td>
-                                                        <td> watched sellers placeholder </td>
+                                                        <td> watched seller name </td>
                                                         <td> locaton placeholder </td>
                                                         <!-- <td> {{project.status}} </td> -->
                                                         <td align="left">
@@ -184,6 +184,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-text" data-background-color="rose">                                    
@@ -256,126 +258,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-text" data-background-color="rose">
-                                    <h4 class="card-title">Watched sellers</h4>
-                                    <p class="category">Sellers with suspicious items</p>
-                                </div>
-                                <div class="card-content table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <th>User name</th>
-                                            <th>Defence score</th>
-                                            <th>User rating</th>
-                                            <th># flagged items</th>
-                                            <th>Location</th>
-                                            <th>Actions</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>User name</td>
-                                                <td>88</td>
-                                                <td>12</td>
-                                                <td>14</td>
-                                                <td>City, State</td>
-                                                <td>
-                                                    <div class="dropdown pull-left">
-                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="material-icons">build</i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                                            <li>
-                                                                <a href="#action">Mark safe</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#action">Go to profile</a>
-                                                            </li>                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>User name</td>
-                                                <td>88</td>
-                                                <td>12</td>
-                                                <td>14</td>
-                                                <td>City, State</td>
-                                                <td>
-                                                    <div class="dropdown pull-left">
-                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="material-icons">build</i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                                            <li>
-                                                                <a href="#action">Mark safe</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#action">Go to profile</a>
-                                                            </li>                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>User name</td>
-                                                <td>88</td>
-                                                <td>12</td>
-                                                <td>14</td>
-                                                <td>City, State</td>
-                                                <td>
-                                                    <div class="dropdown pull-left">
-                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="material-icons">build</i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                                            <li>
-                                                                <a href="#action">Mark safe</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#action">Go to profile</a>
-                                                            </li>                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>User name</td>
-                                                <td>88</td>
-                                                <td>12</td>
-                                                <td>14</td>
-                                                <td>City, State</td>
-                                                <td>
-                                                    <div class="dropdown pull-left">
-                                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="material-icons">build</i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                                            <li>
-                                                                <a href="#action">Mark safe</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#action">Go to profile</a>
-                                                            </li>                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-text" data-background-color="rose">
                                     <h4 class="card-title">Watched items</h4>
                                     <p class="category">Suspicious items part of this investigation</p>
                                 </div>
+                                <br>
+                                <br>
                                 <div class="card-content table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -492,252 +384,89 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-icon" data-background-color="rose">
-                                    <i class="material-icons">assignment</i>
-                                </div>
-                                <div class="card-content">
-                                    <div>
-                                        <button class="btn btn-success" style= "float: right" onclick="window.location.href='{{url1}}'">
-                                        <span class="btn-label">
-                                                <i class="material-icons">add</i>
-                                            </span>
-                                        New Project
-                                        </button>
-                                        <h3 class="card-title">Active projects for this investigation</h4>
-                                        
-                                    </div>
+                            <div>
+                                <h3>Comments</h3>
+                                <form action="/run" method="post">
+                                    <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                                <input name="page" type="text" value="{{currentPage}}" hidden/>
                                     <br>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item Name</th>
-                                                    <!-- <th>SKU</th> -->
-                                                    <!-- <th>Created by</th> -->
-                                                    <th>Last run</th>
-                                                    <th>Last access</th>
-                                                    <th>Create date</th>
-                                                    <th>Investigation</th> <!-- Should state either the name of the investigation or N/A -->
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for project in projects %}
-                                                    <tr>
-                                                        <td> {{project.projectName}} </td>
-                                                        <!-- <td> {{project.sku}} </td> -->
-                                                        <!-- <td> {{project.author}} </td> -->
-                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
-                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
-                                                        <td> {{project.date.strftime("%b %d, %Y")}} </td>
-                                                        <td> Investigation place holder </td>
-                                                        <td align="right">
-                                                            <form action="/dashboard" method="post">
-                                                                <input name="key" type="text" value="{{project.key}}" hidden/>
-                                                                <input name="page" type="text" value="1" hidden/>
-                                                                <input class="btn btn-primary btn-xs" style="background-color: #4caf50" name="run" value="Run" type="submit" />
-                                                                <input class="btn btn-primary btn-xs" style="background-color: #ff9800"name="edit" value="Edit" type="submit" />
-                                                                <input class="btn btn-primary btn-xs" style="background-color: #f54437"name="delete" value="Delete" type="submit" />                                                                
-                                                                <!-- <input name="edit" value="Edit" type="submit"/> -->
-                                                                <!-- <input name="delete" value="Delete" type="submit"/> -->
-                                                                <!-- <input name="run" value="Run" type="submit"/> -->
-                                                            </form>
-                                                      </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                    Comments: 
+                                    <br>
+                                    <textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
+                                    <br>
+                                    <textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
+                                    <br>
+                                    <input type="submit" value="Add Comment"/>
+                                </form>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>Comments</h3>
-                            <form action="/run" method="post">
-                                <input name="projectKey" type="text" value="{{projectID}}" hidden/>
-                            <input name="page" type="text" value="{{currentPage}}" hidden/>
-                                <br>
-                                Comments: 
-                                <br>
-                                <textarea name="comments" rows="10" cols="80">{{comments}}</textarea>  
-                                <br>
-                                <textarea name="newComment" rows="2" cols="80">TYPE COMMENTS HERE</textarea>  
-                                <br>
-                                <input type="submit" value="Add Comment"/>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>Project timeline</h3>
-                            <ul class="timeline timeline-simple">
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge danger">
-                                        <i class="material-icons">face</i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <span class="label label-danger">Seller added</span>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Name of seller and a link to the profile</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge danger">
-                                        <i class="material-icons">face</i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <span class="label label-danger">Seller added</span>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Name of seller and a link to the profile</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge info">
-                                        <i class="material-icons">fingerprint</i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <span class="label label-info">Investigation started</span>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Name of investigation, investigation owner</p>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>                 
             </div>
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-text" data-background-color="green">                                    
-                        <h4 class="card-title">Items marked safe</h4>
-                    </div>
-                    <div class="card-content">                        
-                        <br>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                      <th> Image </th>
-                                      <th> Item </th>
-                                      <th> Location </th>
-                                      <th> Defence score </th>
-                                      <th> Seller </th>
-                                      <th> Seller rating </th>                                      
-                                      <th> Price </th>                                      
-                                      <th> Distance </th>
-                                      <th> Status </th>
-                                      <th> Actions </th>                                                
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if numResults|int > 0%} 
-                                    {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
-                                        <tr>
-                                            <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
-                                            <td> <a href="{{item.website}}" target="_blank"> {{item.title[0:30]}}... </a> </td>
-                                            <td> {{item.location[0:10]}}... </td>
-                                            <td> Place holder</td>
-                                            <td> {{item.seller}} </td>
-                                            <td> {{item.sellerRating}} </td>
-                                            <td align="center"> {{"${:,.2f}".format(item.price)}} </td>
-                                            <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
-                                            <td align="center"> {{item.searchStatus}} </td>
-                                            <td align="center">
-                                                <form action="/run" method="post">
-                                                    <input name="projectKey" type="text" value="{{projectID}}" hidden/>
-                                                    <input name="page" type="text" value="{{currentPage}}" hidden/>
-                                                    <input name="itemKey" type="text" value="{{item.key}}" hidden/>
-                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
-                                                        <i class="material-icons">check</i>
-                                                    </button>
-                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
-                                                        <i class="material-icons">warning</i>
-                                                    </button>
-                                                    <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
-                                                        <i class="material-icons">more_horiz</i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    {% endif %}
-                                </tbody>
-                            </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-text" data-background-color="green">                                    
+                            <h4 class="card-title">Items marked safe</h4>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-text" data-background-color="green">                                    
-                        <h4 class="card-title">Sellers marked safe</h4>
-                    </div>
-                    <div class="card-content">                        
-                        <br>
-                        <div class="table-responsive">
+                        <div class="card-content">                        
+                            <br>
                             <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Seller name</th>
-                                                    <th>Defence score</th> <!-- Likelihood of being a malicious seller -->
-                                                    <th>Seller rating</th>
-                                                    <th>Number of Posts</th>
-                                                    <th>Times Flagged</th>
-                                                    <th>Suspicious Item</th>
-                                                    <th>Investigation</th> <!-- Should state either the name of the investigation or N/A -->
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for Seller in watchedSellers %}
-                                                    <tr>
-                                                        <td> <a href="{{Seller.url}}"> {{Seller.userName}} </td>
-                                                        <td align="center"> {{Seller.sellerRating}} </td>
-                                                        <td align="center"> {{Seller.sellerRating}} </td>
-                                                        <td align="center"> {{Seller.numberOfPosts}} </td>
-                                                        <td align="center"> {{Seller.timesFlagged}} </td>
-                                                        <td> <a href="{{Seller.watchedResultURL}}"> {{Seller.watchedResultTitle}} </td>
-                                                        <td> Investigation place holder </td>
-                                                        <td align="left">
-                                                        <form action="/run" method="post">
-                                                            <input name="projectKey" type="text" value="{{projectID}}" hidden/>
-                                                            <input name="page" type="text" value="{{currentPage}}" hidden/>
-                                                            <input name="itemKey" type="text" value="{{item.key}}" hidden/>
-                                                            <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
-                                                                <i class="material-icons">check</i>
-                                                            </button>
-                                                            <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
-                                                                <i class="material-icons">warning</i>
-                                                            </button>
-                                                            <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
-                                                                <i class="material-icons">more_horiz</i>
-                                                            </button>
-                                                        </form>
-                                            </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                          <th> Image </th>
+                                          <th> Item </th>
+                                          <th> Location </th>
+                                          <th> Defence score </th>
+                                          <th> Seller </th>
+                                          <th> Seller rating </th>                                      
+                                          <th> Price </th>                                      
+                                          <th> Distance </th>
+                                          <th> Status </th>
+                                          <th> Actions </th>                                                
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if numResults|int > 0%} 
+                                        {% for item in searchResults[((currentPage|int-1)*resultsPerPage|int):(currentPage|int * resultsPerPage|int)]%}
+                                            <tr>
+                                                <td> <img src="{{item.imageLink}}" style="width:75px;height:50px;" > </td>
+                                                <td> <a href="{{item.website}}" target="_blank"> {{item.title[0:30]}}... </a> </td>
+                                                <td> {{item.location[0:10]}}... </td>
+                                                <td> Place holder</td>
+                                                <td> {{item.seller}} </td>
+                                                <td> {{item.sellerRating}} </td>
+                                                <td align="center"> {{"${:,.2f}".format(item.price)}} </td>
+                                                <td align="center"> {{"{:,.2f}".format(item.distance)}} </td>
+                                                <td align="center"> {{item.searchStatus}} </td>
+                                                <td align="center">
+                                                    <form action="/run" method="post">
+                                                        <input name="projectKey" type="text" value="{{projectID}}" hidden/>
+                                                        <input name="page" type="text" value="{{currentPage}}" hidden/>
+                                                        <input name="itemKey" type="text" value="{{item.key}}" hidden/>
+                                                        <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #4caf50"  title="Click to label safe" name="safe" value="Safe" type="submit">
+                                                            <i class="material-icons">check</i>
+                                                        </button>
+                                                        <button class="btn btn-primary btn-round btn-fab btn-fab-mini" style="background-color: #f54437" title="Click to label suspicious" name="suspicious" value="Suspicious" type="submit">
+                                                            <i class="material-icons">warning</i>
+                                                        </button>
+                                                        <button class="btn btn-primary btn-round btn-fab btn-fab-mini" title="Click to see more information" name="details" value="Details" type="submit">
+                                                            <i class="material-icons">more_horiz</i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            
- 
         <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
